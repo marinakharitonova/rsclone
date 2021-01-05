@@ -1,0 +1,44 @@
+{
+  "name": "rsclone",
+  "version": "1.0.0",
+  "description": "clone of \"Yandex raspisaniya\"",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node_modules/.bin/webpack serve",
+    "build": "cross-env NODE_ENV=production node_modules/.bin/webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marinakharitonova/rsclone.git"
+  },
+  "author": "Marina Kharitonova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marinakharitonova/rsclone/issues"
+  },
+  "homepage": "https://github.com/marinakharitonova/rsclone#readme",
+  "devDependencies": {
+    "eslint": "^7.17.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0"
+  },
+  "dependencies": {
+    "eslint-config-airbnb-base": "^14.2.1",
+    "copy-webpack-plugin": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "node-sass": "^5.0.0",
+    "postcss-loader": "^4.1.0",
+    "resolve-url-loader": "^3.1.2",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.7.3"
+  }
+}
