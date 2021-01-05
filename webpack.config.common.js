@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -35,18 +36,14 @@ module.exports = {
         ]
       },
       {
-        test: /\.(scss|css)?$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          { loader: 'style-loader' },
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
+            loader: MiniCssExtractPlugin.loader
           },
-          { loader: 'postcss-loader' },
-          { loader: 'resolve-url-loader' },
-          { loader: 'sass-loader', options: { sourceMap: true } }
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
         ]
       }
     ]
@@ -55,6 +52,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       baseHref: '/',
       template: './index.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.bundle.css'
     })
     /* new CopyPlugin({
       patterns: [
