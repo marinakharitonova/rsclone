@@ -1,0 +1,11 @@
+.header{
+  &__container{
+    @include flex(row nowrap, space-between, flex-start);
+  }
+
+  &__text{
+    font-size: 28px;
+    line-height: 40px;
+    text-transform: uppercase;
+  }
+}
