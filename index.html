@@ -13,14 +13,45 @@
         <div class="container">
             <div class="header__container">
                 <div class="header__logo">
-                    <a href="https://yandex.ru/" target="_blank"><img src="src/assets/img/yandex-logo.png" alt="Яндекс"></a>
+                    <a href="https://yandex.ru/" target="_blank" class="header__logo-text"><img src="src/assets/img/yandex-logo.png" alt="Яндекс"></a>
                     <a href="#" target="_blank"><img src="src/assets/img/rasp-logo.png" alt="Расписания"></a>
                 </div>
                 <div class="header__desc">
                     <div class="header__text">RS CLone</div>
+                    <div class="header__tickets">
+                        <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-img"><img src="src/assets/img/tickets.png" alt="Билеты"></a>
+                        <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-text">Билеты</a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
+    <section class="main">
+        <div class="container">
+            <h1 class="main__title">
+                Расписание пригородного и междугородного транспорта
+            </h1>
+            <div class="selector main__selector">
+                <button class="selector__item active">Любой</button>
+                <button class="selector__item">Самолет</button>
+                <button class="selector__item">Поезд</button>
+                <button class="selector__item">Электричка</button>
+                <button class="selector__item">Автобус</button>
+            </div>
+            <div class="cities main__cities">
+                <div class="cities__input-wrapper cities__input-wrapper_from">
+                    <input type="text" class="cities__input cities__input_from" placeholder="Откуда">
+                </div>
+                <button class="cities__change"></button>
+                <div class="cities__input-wrapper cities__input-wrapper_to">
+                    <input type="text" class="cities__input cities__input_to" placeholder="Куда">
+                </div>
+                <div class="cities__input-wrapper cities__input-wrapper_date">
+                    <input type="text" class="cities__input cities__input_date" value="cегодня">
+                </div>
+                <button class="cities__button">Найти</button>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

@@ -4,8 +4,31 @@
   }
 
   &__text{
-    font-size: 28px;
-    line-height: 40px;
     text-transform: uppercase;
+    @include font-set(20px, 700, 30px, $cloneColor);
+  }
+
+  &__logo{
+    &-text{
+      margin-right: 5px;
+    }
+  }
+
+  &__tickets{
+    @include flex(row nowrap, flex-start, flex-start);
+
+    &-img{
+      margin-right: 4px;
+    }
+
+    &-text{
+      font-family: 'Yandex-Bold', Arial, Verdana, sans-serif;
+      @include font-set(15px, 700, 23px, $textColor);
+      transition: opacity 0.3s;
+      text-decoration: none;
+      &:hover{
+        opacity: 0.7;
+      }
+    }
   }
 }
