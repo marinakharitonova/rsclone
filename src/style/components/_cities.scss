@@ -1,5 +1,18 @@
 .cities{
-  @include flex(row nowrap, flex-start, flex-start);
+
+
+  &__fields, &__names{
+    @include flex(row nowrap, flex-start, flex-start);
+  }
+
+  &__places{
+    flex-grow: 1;
+  }
+
+  &__names{
+    flex-grow: 1;
+    margin-bottom: 10px;
+  }
 
   &__input{
     font-size: 18px;
@@ -30,6 +43,7 @@
       flex-grow: 1;
 
       &_date{
+        margin-bottom: 10px;
         &:before{
           content: '';
           position: absolute;
@@ -86,5 +100,22 @@
         content: none;
       }
     }
+
+    &-arrow{
+      width: 35px;
+      margin-top: 5px;
+    }
+  }
+
+  &__date{
+    flex-grow: 1;
+    &-text{
+      cursor: default;
+    }
+  }
+
+  &__last{
+    cursor: default;
+    @include flex(row nowrap, flex-start, flex-start);
   }
 }

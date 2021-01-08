@@ -9,8 +9,12 @@
     margin-bottom: 30px;
   }
 
-  &__cities{
+  &__cities, &__home, &__template{
     max-width: 1160px;
     margin: 0 auto;
+  }
+
+  &__cities{
+    margin-bottom: 40px;
   }
 }

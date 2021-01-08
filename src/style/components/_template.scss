@@ -1,0 +1,103 @@
+.template{
+  font-size: 13px;
+  line-height: 18px;
+
+  &__list{
+    background: $templateBg;
+    padding: 10px;
+  }
+
+  &__item{
+    padding: 15px;
+    border-bottom: 1px solid $selectorBorderColor;
+    @include flex(row nowrap, flex-start, flex-start);
+    background: $white;
+  }
+
+  &__block{
+    padding-right: 60px;
+    &:last-child{
+      padding-right: 0;
+    }
+
+    &_time{
+      @include flex(row nowrap, space-between, flex-start);
+      width: 40%;
+    }
+
+    &_price{
+      width: 20%;
+    }
+
+    &_name{
+      width: 40%;
+    }
+  }
+
+  &__img{
+    width: 25px;
+    margin-right: 8px;
+  }
+
+  .link{
+    text-decoration: none;
+  }
+
+  &__name{
+    @include flex(row nowrap, flex-start, center);
+    margin-bottom: 7px;
+  }
+
+  &__desc{
+    color: $descColor;
+    &-model{
+      color: $durationColor;
+      margin-left: 5px;
+    }
+  }
+
+  &__time{
+    &-duration, &-date{
+      color: $durationColor;
+      margin-bottom: 5px;
+    }
+    &-from, &-to{
+      font-size: 15px;
+      line-height: 20px;
+      margin-bottom: 5px;
+    }
+    &-from{
+      font-weight: 700;
+    }
+    &-station{
+      color: $descColor;
+    }
+    &_right{
+      text-align: right;
+    }
+    &_center{
+      text-align: center;
+    }
+  }
+
+  &__price{
+    &-item{
+      @include flex(row nowrap, space-between, flex-start);
+      margin-bottom: 5px;
+
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+
+    &-name{
+      font-size: 11px;
+      line-height: 13px;
+      color: $durationColor;
+    }
+
+    &-cost{
+      font-weight: 700;
+    }
+  }
+}
