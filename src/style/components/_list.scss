@@ -28,5 +28,19 @@
       background-color: $selectorBgActive;
     }
   }
+
+  &_home{
+    opacity: 1;
+    z-index: 1;
+    border: none;
+    position: static;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  &_station{
+    top: -5px;
+    right: -80px;
+  }
 }
 
