@@ -1,0 +1,121 @@
+.cities{
+
+
+  &__fields, &__names{
+    @include flex(row nowrap, flex-start, flex-start);
+  }
+
+  &__places{
+    flex-grow: 1;
+  }
+
+  &__names{
+    flex-grow: 1;
+    margin-bottom: 10px;
+  }
+
+  &__input{
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px 15px;
+    border: 1px solid $selectorBorderColor;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus{
+      outline: 2px solid $selectBorderActive;
+      outline-offset: -2px;
+    }
+
+    &:hover{
+      border: 1px solid $citiesBorderHoverColor;
+    }
+
+    &_from, &_to{
+      border-right-color: transparent;
+    }
+    &_to, &_date{
+      border-left-color: transparent;
+    }
+
+    &-wrapper{
+      position: relative;
+      flex-grow: 1;
+
+      &_date{
+        margin-bottom: 10px;
+        &:before{
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 10px;
+          height: 26px;
+          width: 1px;
+          background: $selectorBorderColor;
+          z-index: 2;
+        }
+      }
+    }
+  }
+
+  &__button{
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px 15px;
+    background-color: $citiesButtonColor;
+    width: 100px;
+    border-radius: 0 3px 3px 0;
+    transition: background-color 0.3s;
+    border: 1px solid $citiesButtonColor;
+
+    &:hover{
+      background-color: $selectBorderActive;
+    }
+  }
+
+  &__change{
+    width: 50px;
+    height: 46px;
+    position: relative;
+    border-top: 1px solid $selectorBorderColor;
+    border-bottom: 1px solid $selectorBorderColor;
+    &:after, &:before{
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 10px;
+      height: 26px;
+      width: 1px;
+      background: $selectorBorderColor;
+      z-index: 2;
+    }
+    &:before{
+      right: auto;
+      left: -1px;
+    }
+
+    &:hover{
+      border: 1px solid $citiesBorderHoverColor;
+      &:after, &:before{
+        content: none;
+      }
+    }
+
+    &-arrow{
+      width: 35px;
+      margin-top: 5px;
+    }
+  }
+
+  &__date{
+    flex-grow: 1;
+    &-text{
+      cursor: default;
+    }
+  }
+
+  &__last{
+    cursor: default;
+    @include flex(row nowrap, flex-start, flex-start);
+  }
+}

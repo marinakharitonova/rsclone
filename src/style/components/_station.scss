@@ -1,0 +1,45 @@
+.station{
+  &__img{
+    margin-right: 8px;
+    width: 25px;
+
+    &_arrow{
+      margin-right: 0;
+      margin-left: auto;
+      transition: transform 0.3s;
+    }
+  }
+  &__name{
+    font-size: 18px;
+    line-height: 20px;
+  }
+  &__caption{
+    @include flex(row nowrap, flex-start, center);
+    margin-bottom: 10px;
+
+    &_link{
+      cursor: pointer;
+      transition: color 0.3s;
+      position: relative;
+      &:hover{
+        color: $linkHoverColor;
+      }
+      &.active{
+        .station__img_arrow{
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  &__item{
+    margin-bottom: 5px;
+    min-width: 50%;
+  }
+  .link{
+    font-size: 15px;
+    line-height: 18px;
+  }
+  &__list{
+    @include flex(row wrap, flex-start, flex-start);
+  }
+}

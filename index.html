@@ -5,10 +5,429 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://yastat.net/s3/rasp/s/morda-front/_/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="https://yastat.net/s3/rasp/s/morda-front/_/favicons/favicon-32x32.png">
     <title>Расписание электричек, поездов, автобусов и самолётов — Яндекс.Расписания</title>
 </head>
 <body>
+<header class="header">
+    <div class="container">
+        <div class="header__container">
+            <div class="header__left">
+                <div class="header__logo">
+                    <a href="https://yandex.ru/" target="_blank" class="header__logo-text"><img
+                            src="src/assets/img/yandex-logo.png" alt="Яндекс"></a>
+                    <a href="#" target="_blank"><img src="src/assets/img/rasp-logo.png" alt="Расписания"></a>
+                </div>
+                <div class="header__text">RS CLone</div>
+            </div>
 
+            <div class="header__desc">
+                <div class="header__tickets">
+                    <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-img"><img
+                            src="src/assets/img/tickets.png" alt="Билеты"></a>
+                    <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-text">Билеты</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="main">
+    <div class="container">
+        <h1 class="main__title">
+            Расписание пригородного и междугородного транспорта
+        </h1>
+        <div class="selector main__selector">
+            <button class="selector__item active">Любой</button>
+            <button class="selector__item">Самолет</button>
+            <button class="selector__item">Поезд</button>
+            <button class="selector__item">Электричка</button>
+            <button class="selector__item">Автобус</button>
+        </div>
+        <div class="cities main__cities">
+            <div class="cities__fields">
+                <div class="cities__places">
+                    <div class="cities__names">
+                        <div class="cities__input-wrapper cities__input-wrapper_from">
+                            <input type="text" class="cities__input cities__input_from" placeholder="Откуда">
+                            <ul class="list">
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                            </ul>
+                        </div>
+                        <button class="cities__change">
+                            <img src="src/assets/img/arrows.svg" alt="" class="cities__change-arrow">
+                        </button>
+                        <div class="cities__input-wrapper cities__input-wrapper_to">
+                            <input type="text" class="cities__input cities__input_to" placeholder="Куда">
+                            <ul class="list">
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                                <li class="list__item">QWE</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cities__last">
+                        <button class="link">Рязань-Москва</button>
+                        <button class="link">Рязань-Сасово</button>
+                        <button class="link">Рязань-Ряжск</button>
+                        <div class="link-wrapper">
+                            <button class="link">● ● ●</button>
+                            <ul class="list list_last">
+                                <li class="list__item">Рязань-Москва</li>
+                                <li class="list__item">Рязань-Москва</li>
+                                <li class="list__item">Рязань-Москва</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="cities__date">
+                    <div class="cities__input-wrapper cities__input-wrapper_date">
+                        <input type="text" class="cities__input cities__input_date" value="cегодня">
+                    </div>
+                    <div class="cities__date-text">
+                        <button class="link">сегодня</button>
+                        <button class="link">завтра</button>
+                        <button class="link">на все дни</button>
+                    </div>
+                </div>
+
+                <button class="cities__button">Найти</button>
+            </div>
+        </div>
+        <div class="home main__home">
+            <div class="home__location">
+                <div class="home__name">
+                    <button class="link link_home">Рязань</button>
+                    <div class="home__dropdown">
+                        <div class="home__fields">
+                            <input type="text" class="home__input">
+                            <button class="home__button">Сменить</button>
+                            <button class="home__close"></button>
+                        </div>
+                        <ul class="list list_home">
+                            <li class="list__item">Рязань</li>
+                            <li class="list__item">Рязань</li>
+                            <li class="list__item">Рязань</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="text">8 января, пятница, местное время 20:55</p>
+            </div>
+            <div class="home__places">
+                <div class="home__station station">
+                    <div class="station__caption">
+                        <img src="src/assets/img/el-train.svg" alt="" class="station__img">
+                        <h2 class="station__name">Направление электричек</h2>
+                    </div>
+                    <ul class="station__list">
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненск - Кастроненск</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="home__station station">
+                    <div class="station__caption">
+                        <img src="src/assets/img/plane.png" alt="" class="station__img">
+                        <h2 class="station__name">Табло аэропортов</h2>
+                    </div>
+                    <ul class="station__list">
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="home__station station">
+                    <div class="station__caption">
+                        <img src="src/assets/img/train.svg" alt="" class="station__img">
+                        <h2 class="station__name">Расписание поездов</h2>
+                    </div>
+                    <ul class="station__list">
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="home__station station">
+                    <div class="station__caption">
+                        <img src="src/assets/img/bus.png" alt="" class="station__img">
+                        <h2 class="station__name">Расписание автобусов</h2>
+                    </div>
+                    <ul class="station__list">
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                        <li class="station__item">
+                            <a href="" class="link">Кастроненское</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="home__station station">
+                    <div class="station__caption  station__caption_link">
+                        <img src="src/assets/img/bus.png" alt="" class="station__img">
+                        <h2 class="station__name">Расписание автобусов</h2>
+                        <img src="src/assets/img/arrow-right.svg" alt="" class="station__img station__img_arrow">
+                        <ul class="list list_station">
+                            <li class="list__item">qweewe</li>
+                            <li class="list__item">qweewe</li>
+                            <li class="list__item">qweewe</li>
+                            <li class="list__item">qweewe</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="home__advert advert">
+                <div class="advert__item">
+                    <a href="https://mobile.yandex.ru/apps/android/rasp" target="_blank" class="advert__link">
+                        <img src="src/assets/img/train-adv.svg" alt="Электички для смартфона" class="advert__img">
+                        <h3 class="advert__name">Электички для смартфона</h3>
+                        <div class="advert__buttons">
+                            <button class="advert__button">
+                                <img src="src/assets/img/google-icon.png" alt="Google play" class="advert__img_small">
+                            </button>
+                            <button class="advert__button">
+                                <img src="src/assets/img/apple-icon.png" alt="App Store" class="advert__img_small">
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <div class="advert__item">
+                    <a href="https://travel.yandex.ru/buses" target="_blank" class="advert__link">
+                        <img src="src/assets/img/bus-adv.svg" alt="Яндекс.Автобусы" class="advert__img">
+                        <h3 class="advert__name">Яндекс.Автобусы</h3>
+                        <p class="advert__text">Билеты на междугородние автобусы</p>
+                    </a>
+                </div>
+                <div class="advert__item">
+                    <a href="https://travel.yandex.ru/avia" target="_blank" class="advert__link">
+                        <img src="src/assets/img/plane-adv.svg" alt="Яндекс.Авиабилеты" class="advert__img">
+                        <h3 class="advert__name">Яндекс.Авиабилеты</h3>
+                        <p class="advert__text">Поиск дешевых авиабилетов</p>
+                    </a>
+                </div>
+            </div>
+            <div class="home__info info">
+                <h2 class="info__caption">
+                    Актуальное расписание на&nbsp;Яндексе
+                </h2>
+                <p class="info__text">
+                    Яндекс.Расписания&nbsp;&mdash; это сервис, где можно получить информацию о&nbsp;движении
+                    пригородного и&nbsp;междугороднего транспорта и&nbsp;узнать актуальное расписание электричек,
+                    поездов, самолетов, автобусов, теплоходов и&nbsp;паромов. А&nbsp;также выяснить, как добраться из&nbsp;одного
+                    пункта в&nbsp;другой, где делать пересадку и&nbsp;сколько стоит билет.
+                </p>
+            </div>
+        </div>
+        <div class="template main__template">
+            <ul class="template__list">
+                <li class="template__item">
+                    <div class="template__block template__block_name">
+                        <div class="template__name">
+                            <img src="src/assets/img/train.svg" alt="Поезд" class="template__img">
+                            <a href="" class="link">Самара - Москва</a>
+                        </div>
+                        <p class="template__desc">
+                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
+                        </p>
+                    </div>
+                    <div class="template__block template__block_time">
+                        <div class="template__time">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-from">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                        <div class="template__time template__time_center">
+                            <p class="template__time-duration">3ч 10мин</p>
+                        </div>
+                        <div class="template__time template__time_right">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-to">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                    </div>
+                    <div class="template__block template__block_price">
+                        <ul class="template__price">
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="template__item">
+                    <div class="template__block template__block_name">
+                        <div class="template__name">
+                            <img src="src/assets/img/el-train.svg" alt="Поезд" class="template__img">
+                            <a href="" class="link">Самара - Москва</a>
+                        </div>
+                        <p class="template__desc">
+                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
+                        </p>
+                    </div>
+                    <div class="template__block template__block_time">
+                        <div class="template__time">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-from">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                        <div class="template__time template__time_center">
+                            <p class="template__time-duration">3ч 10мин</p>
+                        </div>
+                        <div class="template__time template__time_right">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-to">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                    </div>
+                    <div class="template__block template__block_price">
+                        <ul class="template__price">
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                            <li class="template__price-item">
+                                <span class="template__price-name">плацкарт: 1</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="template__item">
+                    <div class="template__block template__block_name">
+                        <div class="template__name">
+                            <img src="src/assets/img/bus.png" alt="Поезд" class="template__img">
+                            <a href="" class="link">Самара - Москва</a>
+                        </div>
+                        <p class="template__desc">
+                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
+                            <span class="template__desc-model">qwqeqw</span>
+                        </p>
+                    </div>
+                    <div class="template__block template__block_time">
+                        <div class="template__time">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-from">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                        <div class="template__time template__time_center">
+                            <p class="template__time-duration">3ч 10мин</p>
+                        </div>
+                        <div class="template__time template__time_right">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-to">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                    </div>
+                    <div class="template__block template__block_price">
+                        <ul class="template__price">
+                            <li class="template__price-item">
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="template__item">
+                    <div class="template__block template__block_name">
+                        <div class="template__name">
+                            <img src="src/assets/img/plane.png" alt="Самолет" class="template__img">
+                            <a href="" class="link">Самара - Москва</a>
+                        </div>
+                        <p class="template__desc">
+                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
+                        </p>
+                    </div>
+                    <div class="template__block template__block_time">
+                        <div class="template__time">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-from">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                        <div class="template__time template__time_center">
+                            <p class="template__time-duration">3ч 10мин</p>
+                        </div>
+                        <div class="template__time template__time_right">
+                            <p class="template__time-date">8 янв</p>
+                            <p class="template__time-to">04:45</p>
+                            <p class="template__time-station">Рязань - 2</p>
+                        </div>
+                    </div>
+                    <div class="template__block template__block_price">
+                        <ul class="template__price">
+                            <li class="template__price-item">
+                                <span class="template__price-name">эконом</span>
+                                <span class="template__price-cost">от 1 177 Р</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container footer__container">
+        <div class="footer__block">
+            <iframe frameborder="0" style="overflow: hidden; border: 0; width: 740px; height: 51px;" src="//yandex.st/rasp/media/apicc/copyright_horiz_yellow.html"></iframe>
+        </div>
+        <div class="footer__block">
+            <a href="https://rs.school/js/"><img src="https://rs.school/images/rs_school_js.svg" alt="RS School"></a>
+        </div>
+        <div class="footer__block">
+            <a href="https://github.com/marinakharitonova" target="_blank" class="footer__link">
+                <img src="src/assets/img/github-logo.svg" alt="github" class="footer__link-img">
+                <span class="footer__link-text">marinakharitonova</span>
+            </a>
+            <span class="footer__text">2021</span>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

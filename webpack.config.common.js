@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -29,24 +30,26 @@ module.exports = {
         }
       },
       {
-        test: /\.png$/,
+        test: /\.(woff2|png|svg)$/,
         use: [
-          'file-loader'
+          {
+            loader: 'file-loader'
+          }
         ]
       },
       {
-        test: /\.(scss|css)?$/,
+        test: /\.scss$/,
         use: [
-          { loader: 'style-loader' },
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
           {
             loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
+            options: { url: false }
           },
-          { loader: 'postcss-loader' },
-          { loader: 'resolve-url-loader' },
-          { loader: 'sass-loader', options: { sourceMap: true } }
+          'postcss-loader',
+          'resolve-url-loader',
+          'sass-loader'
         ]
       }
     ]
@@ -55,18 +58,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       baseHref: '/',
       template: './index.html'
-    })
-    /* new CopyPlugin({
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.bundle.css'
+    }),
+    new CopyPlugin({
       patterns: [
-        {
-          from: './src/style/style.min.css',
-          to: './src/style'
-        },
         {
           from: './src/assets',
           to: './src/assets'
         }
       ]
-    }) */
+    })
   ]
 };

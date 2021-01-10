@@ -1,0 +1,20 @@
+.main{
+  &__title{
+    @include font-set(28px, 400, 40px);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  &__selector{
+    margin-bottom: 30px;
+  }
+
+  &__cities, &__home, &__template{
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  &__cities{
+    margin-bottom: 40px;
+  }
+}
