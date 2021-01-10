@@ -1,0 +1,72 @@
+.advert{
+  @include flex(row nowrap, flex-start, flex-start);
+
+  &__item{
+    flex-grow: 1;
+    height: 150px;
+    border: 1px solid $advertBorder;
+    border-right: none;
+    transition: background-color 0.3s;
+    text-align: center;
+    @include flex(column nowrap, center, center);
+
+    &:last-child{
+      border-right: 1px solid $advertBorder;
+    }
+
+    &:hover{
+      background-color: $advertBorder;
+    }
+  }
+
+  &__img{
+    width: 45px;
+    margin-bottom: 10px;
+    &_small{
+      width: 15px;
+    }
+  }
+
+  &__link{
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    color: $textColor;
+  }
+
+  &__button{
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 2px;
+    width: 30px;
+    height: 25px;
+    padding-top: 1px;
+    transition: border 0.3s;
+    margin-right: 5px;
+    text-align: center;
+
+    &:last-child{
+      margin-right: 0;
+    }
+
+    &:hover{
+      border: 1px solid rgba(0,0,0,.3);
+    }
+  }
+
+  &__name{
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__buttons{
+    margin-top: 3px;
+    cursor: default;
+  }
+
+  &__text{
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
