@@ -1,6 +1,4 @@
 .cities{
-
-
   &__fields, &__names{
     @include flex(row nowrap, flex-start, flex-start);
   }
@@ -36,6 +34,10 @@
     }
     &_to, &_date{
       border-left-color: transparent;
+    }
+
+    &_date{
+      cursor: pointer;
     }
 
     &-wrapper{

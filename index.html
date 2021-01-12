@@ -8,6 +8,9 @@
     <link rel="icon" type="image/png" sizes="32x32"
           href="https://yastat.net/s3/rasp/s/morda-front/_/favicons/favicon-32x32.png">
     <title>Расписание электричек, поездов, автобусов и самолётов — Яндекс.Расписания</title>
+    <script src="https://api-maps.yandex.ru/2.1?apikey=4334eecc-1496-4b85-9762-2ba51915bcaf&lang=ru_RU"
+            type="text/javascript">
+    </script>
 </head>
 <body>
 <header class="header">
@@ -38,11 +41,11 @@
             Расписание пригородного и междугородного транспорта
         </h1>
         <div class="selector main__selector">
-            <button class="selector__item active">Любой</button>
-            <button class="selector__item">Самолет</button>
-            <button class="selector__item">Поезд</button>
-            <button class="selector__item">Электричка</button>
-            <button class="selector__item">Автобус</button>
+            <button class="selector__item active" data-value="all">Любой</button>
+            <button class="selector__item" data-value="plane">Самолет</button>
+            <button class="selector__item" data-value="train">Поезд</button>
+            <button class="selector__item" data-value="suburban">Электричка</button>
+            <button class="selector__item" data-value="bus">Автобус</button>
         </div>
         <div class="cities main__cities">
             <div class="cities__fields">
@@ -50,26 +53,14 @@
                     <div class="cities__names">
                         <div class="cities__input-wrapper cities__input-wrapper_from">
                             <input type="text" class="cities__input cities__input_from" placeholder="Откуда">
-                            <ul class="list">
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                            </ul>
+                            <ul class="list"></ul>
                         </div>
                         <button class="cities__change">
                             <img src="src/assets/img/arrows.svg" alt="" class="cities__change-arrow">
                         </button>
                         <div class="cities__input-wrapper cities__input-wrapper_to">
                             <input type="text" class="cities__input cities__input_to" placeholder="Куда">
-                            <ul class="list">
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                                <li class="list__item">QWE</li>
-                            </ul>
+                            <ul class="list"></ul>
                         </div>
                     </div>
                     <div class="cities__last">
@@ -89,7 +80,7 @@
                 </div>
                 <div class="cities__date">
                     <div class="cities__input-wrapper cities__input-wrapper_date">
-                        <input type="text" class="cities__input cities__input_date" value="cегодня">
+                        <input type="text" class="cities__input cities__input_date" value="cегодня" readonly>
                     </div>
                     <div class="cities__date-text">
                         <button class="link">сегодня</button>
@@ -246,7 +237,7 @@
                 </p>
             </div>
         </div>
-        <div class="template main__template">
+        <div class="template main__template hide">
             <ul class="template__list">
                 <li class="template__item">
                     <div class="template__block template__block_name">
