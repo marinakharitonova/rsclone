@@ -19,8 +19,9 @@
     border: 1px solid $selectorBorderColor;
     width: 100%;
     box-sizing: border-box;
+    outline: none;
 
-    &:focus{
+    &.active{
       outline: 2px solid $selectBorderActive;
       outline-offset: -2px;
     }

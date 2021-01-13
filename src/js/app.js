@@ -1,5 +1,6 @@
 import Selector from './selector';
-import Input from './input';
+import InputContainer from './inputContainer';
+
 import DATA from './data';
 
 class App {
@@ -12,8 +13,8 @@ class App {
     this.mode = 'all';
 
     this.selector = new Selector(this.getMode.bind(this));
-    this.fromInput = new Input(document.querySelector('.cities__input_from'));
-    this.toInput = new Input(document.querySelector('.cities__input_to'));
+    this.inputContainer = new InputContainer(document.querySelector('.cities__fields'));
+
     // this.getUserGeolocation();
 
     /* const proxyurl = 'https://cors-anywhere.herokuapp.com/';
