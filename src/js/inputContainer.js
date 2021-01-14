@@ -1,4 +1,5 @@
 import Input from './input';
+import DateInput from './dateInput';
 
 class InputContainer {
   constructor(container) {
@@ -10,6 +11,7 @@ class InputContainer {
   init() {
     this.fromInput = new Input(this.container.querySelector('.cities__input_from'));
     this.toInput = new Input(this.container.querySelector('.cities__input_to'));
+    this.dateInput = new DateInput(this.container.querySelector('.cities__input_date'));
     this.changeDirectionBtn = this.container.querySelector('.cities__change');
 
     document.addEventListener('click', this.documentClickListener.bind(this));
@@ -36,6 +38,14 @@ class InputContainer {
 
     this.fromInput.setData(toInputData);
     this.toInput.setData(fromInputData);
+  }
+
+  getParams() {
+    return {
+      from: this.fromInput.getValue(),
+      to: this.toInput.getValue(),
+      date: this.dateInput.getValue()
+    };
   }
 }
 

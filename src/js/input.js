@@ -75,6 +75,10 @@ class Input {
     this.input.value = value;
     this.input.setAttribute('data-code', code);
   }
+
+  getValue() {
+    return this.input.dataset.code;
+  }
 }
 
 export default Input;

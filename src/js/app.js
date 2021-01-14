@@ -10,10 +10,13 @@ class App {
 
   init() {
     this.API_KEY = 'b5d371b3-5e8a-4121-bf07-b76f8f02df8c';
-    this.mode = 'all';
+    this.mode = '';
+    this.searchButton = document.querySelector('.cities__button');
 
-    this.selector = new Selector(this.getMode.bind(this));
+    this.selector = new Selector(this.changeMode.bind(this));
     this.inputContainer = new InputContainer(document.querySelector('.cities__fields'));
+
+    this.searchButton.addEventListener('click', this.searchTrip.bind(this));
 
     // this.getUserGeolocation();
 
@@ -63,9 +66,21 @@ class App {
     });
   }
 
-  getMode(mode) {
+  changeMode(mode) {
     this.mode = mode;
-    console.log(this.mode);
+  }
+
+  searchTrip() {
+    const { from, to, date } = this.inputContainer.getParams();
+    const dateParam = date ? `&date=${date}` : '';
+    const transportParm = this.mode ? `&transport_types=${this.mode}` : '';
+    const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${this.API_KEY}&format=json&from=${from}&to=${to}&lang=ru_RU&page=1${dateParam}${transportParm}`;
+
+    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+    fetch(proxyurl + url)
+      .then(response => response.json())
+      .then(contents => console.log(contents))
+      .catch(() => console.log('Can’t access ' + url + ' response. Blocked by browser?'));
   }
 }
 
