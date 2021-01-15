@@ -52,11 +52,14 @@
     color: $descColor;
     &-model{
       color: $durationColor;
-      margin-left: 5px;
+    }
+    &-carrier{
+      margin-right: 5px;
     }
   }
 
   &__time{
+    width: 40%;
     &-duration, &-date{
       color: $durationColor;
       margin-bottom: 5px;
@@ -74,9 +77,11 @@
     }
     &_right{
       text-align: right;
+      width: 40%;
     }
     &_center{
       text-align: center;
+      width: 20%;
     }
   }
 

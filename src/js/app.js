@@ -1,5 +1,8 @@
 import Selector from './selector';
 import InputContainer from './inputContainer';
+import RequestHelper from './requestHelper';
+import Template from './template';
+import HomeContainer from './homeContainer';
 
 import DATA from './data';
 
@@ -15,6 +18,8 @@ class App {
 
     this.selector = new Selector(this.changeMode.bind(this));
     this.inputContainer = new InputContainer(document.querySelector('.cities__fields'));
+    this.template = new Template(document.querySelector('.main__template'));
+    this.homeContainer = new HomeContainer(document.querySelector('.main__home'));
 
     this.searchButton.addEventListener('click', this.searchTrip.bind(this));
 
@@ -76,11 +81,11 @@ class App {
     const transportParm = this.mode ? `&transport_types=${this.mode}` : '';
     const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${this.API_KEY}&format=json&from=${from}&to=${to}&lang=ru_RU&page=1${dateParam}${transportParm}`;
 
-    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-    fetch(proxyurl + url)
-      .then(response => response.json())
-      .then(contents => console.log(contents))
-      .catch(() => console.log('Can’t access ' + url + ' response. Blocked by browser?'));
+    if (from && to) {
+      this.homeContainer.hide();
+      this.template.show();
+      RequestHelper.sendRequest(url, date, this.template.render.bind(this.template));
+    }
   }
 }
 
