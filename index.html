@@ -80,7 +80,7 @@
                 </div>
                 <div class="cities__date">
                     <div class="cities__input-wrapper cities__input-wrapper_date">
-                        <input type="text" class="cities__input cities__input_date" value="cегодня" readonly>
+                        <input type="text" class="cities__input cities__input_date" value="cегодня" readonly id="datepicker">
                     </div>
                     <div class="cities__date-text">
                         <button class="link link-date" data-value="today">сегодня</button>
@@ -238,168 +238,15 @@
             </div>
         </div>
         <div class="template main__template hide">
-            <ul class="template__list">
-                <li class="template__item">
-                    <div class="template__block template__block_name">
-                        <div class="template__name">
-                            <img src="src/assets/img/train.svg" alt="Поезд" class="template__img">
-                            <a href="" class="link">Самара - Москва</a>
-                        </div>
-                        <p class="template__desc">
-                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
-                        </p>
-                    </div>
-                    <div class="template__block template__block_time">
-                        <div class="template__time">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-from">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                        <div class="template__time template__time_center">
-                            <p class="template__time-duration">3ч 10мин</p>
-                        </div>
-                        <div class="template__time template__time_right">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-to">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                    </div>
-                    <div class="template__block template__block_price">
-                        <ul class="template__price">
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="template__item">
-                    <div class="template__block template__block_name">
-                        <div class="template__name">
-                            <img src="src/assets/img/el-train.svg" alt="Поезд" class="template__img">
-                            <a href="" class="link">Самара - Москва</a>
-                        </div>
-                        <p class="template__desc">
-                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
-                        </p>
-                    </div>
-                    <div class="template__block template__block_time">
-                        <div class="template__time">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-from">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                        <div class="template__time template__time_center">
-                            <p class="template__time-duration">3ч 10мин</p>
-                        </div>
-                        <div class="template__time template__time_right">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-to">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                    </div>
-                    <div class="template__block template__block_price">
-                        <ul class="template__price">
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                            <li class="template__price-item">
-                                <span class="template__price-name">плацкарт: 1</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="template__item">
-                    <div class="template__block template__block_name">
-                        <div class="template__name">
-                            <img src="src/assets/img/bus.png" alt="Поезд" class="template__img">
-                            <a href="" class="link">Самара - Москва</a>
-                        </div>
-                        <p class="template__desc">
-                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
-                            <span class="template__desc-model">qwqeqw</span>
-                        </p>
-                    </div>
-                    <div class="template__block template__block_time">
-                        <div class="template__time">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-from">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                        <div class="template__time template__time_center">
-                            <p class="template__time-duration">3ч 10мин</p>
-                        </div>
-                        <div class="template__time template__time_right">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-to">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                    </div>
-                    <div class="template__block template__block_price">
-                        <ul class="template__price">
-                            <li class="template__price-item">
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="template__item">
-                    <div class="template__block template__block_name">
-                        <div class="template__name">
-                            <img src="src/assets/img/plane.png" alt="Самолет" class="template__img">
-                            <a href="" class="link">Самара - Москва</a>
-                        </div>
-                        <p class="template__desc">
-                            Индивидуальный Предприниматель Филаткин Алексей Валериевич
-                        </p>
-                    </div>
-                    <div class="template__block template__block_time">
-                        <div class="template__time">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-from">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                        <div class="template__time template__time_center">
-                            <p class="template__time-duration">3ч 10мин</p>
-                        </div>
-                        <div class="template__time template__time_right">
-                            <p class="template__time-date">8 янв</p>
-                            <p class="template__time-to">04:45</p>
-                            <p class="template__time-station">Рязань - 2</p>
-                        </div>
-                    </div>
-                    <div class="template__block template__block_price">
-                        <ul class="template__price">
-                            <li class="template__price-item">
-                                <span class="template__price-name">эконом</span>
-                                <span class="template__price-cost">от 1 177 Р</span>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
+            <div class="template__preloader">
+                <img src="src/assets/img/plane.png" alt="" class="template__preloader-img">
+                <p class="text">Идет поиск подходящих вариантов</p>
+            </div>
+            <ul class="template__list hide"></ul>
+            <div class="template__no-transport hide">
+                <h2>Рейсов не найдено :(</h2>
+                <p class="text">Посмотрите расписание на все дни, варианты проезда всеми видами транспорта или выберите другой пункт назначения.</p>
+            </div>
         </div>
     </div>
 </section>

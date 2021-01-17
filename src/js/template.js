@@ -9,6 +9,8 @@ class Template {
 
   init() {
     this.itemsList = this.container.querySelector('.template__list');
+    this.noTransportNotification = this.container.querySelector('.template__no-transport');
+    this.preloader = this.container.querySelector('.template__preloader');
   }
 
   show() {
@@ -51,10 +53,10 @@ class Template {
   }
 
   static getDuration(number) {
-    const count = number / 3600;
-    const int = Math.trunc(count);
-    const float = ((count % 1).toFixed(2)).toString().split('.')[1];
-    return `${int}ч ${float}мин`;
+    const count = number / 60;
+    const hours = Math.trunc(count / 60);
+    const min = count % 60;
+    return `${hours}ч ${DateInput.formatDateNumber(min)}мин`;
   }
 
   static getImgFromTransportType(type) {
@@ -76,7 +78,7 @@ class Template {
         };
       case 'plane':
         return {
-          src: 'src/assets/img/plane.svg',
+          src: 'src/assets/img/plane.png',
           name: 'Самолет'
         };
       default:
@@ -84,21 +86,16 @@ class Template {
     }
   }
 
-  render(data, searchDate) {
-    console.log(data);
-    this.itemsList.innerHTML = '';
-    if (data.segments.length === 0) return false;
-    for (let elem of data.segments) {
-      const name = elem.thread.number ? `${elem.thread.number} ${elem.thread.title}` : `${elem.thread.title}`;
-      const departure = new Date(elem.departure);
-      const arrival = new Date(elem.arrival);
-      const vehicle = elem.thread && elem.thread.vehicle ? elem.thread.vehicle : '';
-      const carrier = elem.thread && elem.thread.carrier ? elem.thread.carrier.title : '';
-      const tickets = elem.tickets_info;
-      const imgInfo = Template.getImgFromTransportType(elem.from.transport_type);
-      // eslint-disable-next-line no-continue
-      if (departure.getDate() !== new Date(searchDate).getDate()) continue;
-      let template = `<li class="template__item">
+  static formatPrice(price) {
+    const floor = Math.floor(price);
+    return floor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
+  drawTemplateElem(options) {
+    const {
+      imgInfo, name, carrier, vehicle, departure, duration, titleFrom, titleTo, arrival, tickets
+    } = options;
+    let template = `<li class="template__item">
                     <div class="template__block template__block_name">
                         <div class="template__name">
                             <img src="${imgInfo.src}" alt="${imgInfo.name}" class="template__img">
@@ -113,23 +110,85 @@ class Template {
                         <div class="template__time">
                             <p class="template__time-date">${departure.getDate()} ${Template.getMonthName(departure.getMonth())}</p>
                             <p class="template__time-from">${DateInput.formatDateNumber(departure.getHours())}:${DateInput.formatDateNumber(departure.getMinutes())}</p>
-                            <p class="template__time-station">${elem.from.popular_title ? elem.from.popular_title : elem.from.title}</p>
+                            <p class="template__time-station">${titleFrom}</p>
                         </div>
                         <div class="template__time template__time_center">
-                            <p class="template__time-duration">${Template.getDuration(elem.duration)}</p>
+                            <p class="template__time-duration">${duration}</p>
                         </div>
                         <div class="template__time template__time_right">
                             <p class="template__time-date">${arrival.getDate()} ${Template.getMonthName(arrival.getMonth())}</p>
                             <p class="template__time-to">${DateInput.formatDateNumber(arrival.getHours())}:${DateInput.formatDateNumber(arrival.getMinutes())}</p>
-                            <p class="template__time-station">${elem.to.popular_title ? elem.to.popular_title : elem.to.title}</p>
+                            <p class="template__time-station">${titleTo}</p>
                         </div>
                     </div>
                     <div class="template__block template__block_price">
-                        <ul class="template__price"></ul>
+                        <ul class="template__price">${tickets}</ul>
                     </div>
                 </li>`;
 
-      this.itemsList.insertAdjacentHTML('beforeend', template);
+    this.itemsList.insertAdjacentHTML('beforeend', template);
+  }
+
+  showNoTransport() {
+    this.itemsList.classList.add('hide');
+    this.noTransportNotification.classList.remove('hide');
+  }
+
+  setDefaultView() {
+    this.preloader.classList.add('hide');
+    this.itemsList.classList.remove('hide');
+    this.noTransportNotification.classList.add('hide');
+    this.itemsList.innerHTML = '';
+  }
+
+  renderTickets(data) {
+    if (!data || data.length === 0) return '';
+    let result = '';
+    for (let elem of data) {
+      let template = `<li class="template__price-item">
+                          <span class="template__price-name">${elem.name ? elem.name : ''}</span>
+                          <span class="template__price-cost">${Template.formatPrice(Number(elem.price.whole))}&nbsp;${elem.currency}</span>
+                      </li>`;
+      result += template;
+    }
+    return result;
+  }
+
+  showPreloader() {
+    this.preloader.classList.remove('hide');
+  }
+
+  render(data, searchDate) {
+    console.log(data);
+    this.setDefaultView();
+    if (data.segments.length === 0) {
+      this.showNoTransport();
+      return false;
+    }
+    const departed = [];
+    for (let elem of data.segments) {
+      const tickets = elem.tickets_info && elem.tickets_info.places ? elem.tickets_info.places : null;
+      const departure = new Date(elem.departure);
+      // eslint-disable-next-line no-continue
+      if (departure.getDate() !== new Date(searchDate).getDate()) continue;
+      let offset = departure - new Date();
+      if (offset <= 0) {
+        departed.push(elem);
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+      this.drawTemplateElem({
+        imgInfo: Template.getImgFromTransportType(elem.thread.transport_type),
+        name: elem.thread.number ? `${elem.thread.number} ${elem.thread.title}` : `${elem.thread.title}`,
+        carrier: elem.thread && elem.thread.carrier ? elem.thread.carrier.title : '',
+        vehicle: elem.thread && elem.thread.vehicle ? elem.thread.vehicle : '',
+        departure: departure,
+        arrival: new Date(elem.arrival),
+        duration: Template.getDuration(elem.duration),
+        titleFrom: elem.from.popular_title ? elem.from.popular_title : elem.from.title,
+        titleTo: elem.to.popular_title ? elem.to.popular_title : elem.to.title,
+        tickets: this.renderTickets(tickets)
+      });
     }
   }
 }

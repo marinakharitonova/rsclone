@@ -105,4 +105,22 @@
       font-weight: 700;
     }
   }
+
+  &__no-transport{
+    text-align: center;
+
+    h2{
+      margin-bottom: 10px;
+      font-size: 30px;
+      line-height: 42px;
+    }
+  }
+
+  &__preloader{
+    text-align: center;
+
+    &-img{
+      margin-bottom: 20px;
+    }
+  }
 }

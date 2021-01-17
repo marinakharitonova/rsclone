@@ -47,6 +47,14 @@ class InputContainer {
       date: this.dateInput.getValue()
     };
   }
+
+  stayLight() {
+    this.container.classList.add('light');
+  }
+
+  removeLight() {
+    this.container.classList.remove('light');
+  }
 }
 
 export default InputContainer;

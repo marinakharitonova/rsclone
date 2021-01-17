@@ -84,7 +84,13 @@ class App {
     if (from && to) {
       this.homeContainer.hide();
       this.template.show();
-      RequestHelper.sendRequest(url, date, this.template.render.bind(this.template));
+      this.template.showPreloader();
+      this.inputContainer.stayLight();
+      RequestHelper.sendRequest(url, date,
+        (...args) => {
+          this.inputContainer.removeLight();
+          this.template.render.call(this.template, ...args);
+        });
     }
   }
 }

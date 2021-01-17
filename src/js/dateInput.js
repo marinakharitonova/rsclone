@@ -1,3 +1,5 @@
+import datepicker from 'js-datepicker';
+
 class DateInput {
   constructor(input) {
     this.input = input;
@@ -10,6 +12,21 @@ class DateInput {
     this.optionsBlock.addEventListener('click', this.optionsBlockEventListener.bind(this));
 
     this.input.setAttribute('data-value', DateInput.getDateFromOption('today'));
+
+    this.picker = datepicker('#datepicker', {
+      startDay: 1,
+      customDays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+      customMonths: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+      minDate: new Date(),
+      formatter: (input, date) => {
+        const value = date.toLocaleDateString();
+        // eslint-disable-next-line no-param-reassign
+        input.value = value;
+      },
+      onSelect: instance => {
+        this.input.setAttribute('data-value', DateInput.formatDate(instance.dateSelected));
+      }
+    });
   }
 
   optionsBlockEventListener(e) {
@@ -40,9 +57,13 @@ class DateInput {
       currentDate = tomorrow;
     } else return '';
 
-    const month = DateInput.formatDateNumber(currentDate.getMonth() + 1);
-    const day = DateInput.formatDateNumber(currentDate.getDate());
-    return `${currentDate.getFullYear()}-${month}-${day}`;
+    return DateInput.formatDate(currentDate);
+  }
+
+  static formatDate(date) {
+    const month = DateInput.formatDateNumber(date.getMonth() + 1);
+    const day = DateInput.formatDateNumber(date.getDate());
+    return `${date.getFullYear()}-${month}-${day}`;
   }
 
   getValue() {

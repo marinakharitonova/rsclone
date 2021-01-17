@@ -3,6 +3,14 @@
     @include flex(row nowrap, flex-start, flex-start);
   }
 
+  &__fields{
+    transition: opacity 0.3s;
+    &.light{
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
   &__places{
     flex-grow: 1;
   }
