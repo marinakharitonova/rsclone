@@ -65,6 +65,17 @@
           background: $selectorBorderColor;
           z-index: 2;
         }
+        &:after{
+          position: absolute;
+          content: '';
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          right: 5px;
+          width: 35px;
+          height: 27px;
+          background: url("../src/assets/img/calendar.png") no-repeat center / cover;
+        }
       }
     }
   }

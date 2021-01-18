@@ -11,6 +11,19 @@ class Template {
     this.itemsList = this.container.querySelector('.template__list');
     this.noTransportNotification = this.container.querySelector('.template__no-transport');
     this.preloader = this.container.querySelector('.template__preloader');
+    this.departedBlock = this.container.querySelector('.template__departed');
+    this.departedItemsList = this.container.querySelector('.template__list-departed');
+
+    document.addEventListener('click', (e) => {
+      const elem = e.target;
+
+      const btn = elem.closest('.template__departed-btn');
+      if (btn) {
+        this.departedItemsList.classList.toggle('hide');
+        let btnText = this.departedBlock.querySelector('.template__departed-btn-text');
+        btnText.textContent = this.departedItemsList.classList.contains('hide') ? 'Показать ушедшие' : 'Скрыть ушедшие';
+      }
+    });
   }
 
   show() {
@@ -91,7 +104,7 @@ class Template {
     return floor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
 
-  drawTemplateElem(options) {
+  drawTemplateElem(options, list) {
     const {
       imgInfo, name, carrier, vehicle, departure, duration, titleFrom, titleTo, arrival, tickets
     } = options;
@@ -126,7 +139,7 @@ class Template {
                     </div>
                 </li>`;
 
-    this.itemsList.insertAdjacentHTML('beforeend', template);
+    list.insertAdjacentHTML('beforeend', template);
   }
 
   showNoTransport() {
@@ -138,7 +151,9 @@ class Template {
     this.preloader.classList.add('hide');
     this.itemsList.classList.remove('hide');
     this.noTransportNotification.classList.add('hide');
+    this.departedBlock.classList.add('hide');
     this.itemsList.innerHTML = '';
+    this.departedItemsList.innerHTML = '';
   }
 
   renderTickets(data) {
@@ -158,6 +173,11 @@ class Template {
     this.preloader.classList.remove('hide');
   }
 
+  showDeparted(col) {
+    this.departedBlock.classList.remove('hide');
+    this.departedBlock.querySelector('.template__departed-col').textContent = col;
+  }
+
   render(data, searchDate) {
     console.log(data);
     this.setDefaultView();
@@ -165,19 +185,13 @@ class Template {
       this.showNoTransport();
       return false;
     }
-    const departed = [];
+    let departedCount = 0;
     for (let elem of data.segments) {
       const tickets = elem.tickets_info && elem.tickets_info.places ? elem.tickets_info.places : null;
       const departure = new Date(elem.departure);
       // eslint-disable-next-line no-continue
       if (departure.getDate() !== new Date(searchDate).getDate()) continue;
-      let offset = departure - new Date();
-      if (offset <= 0) {
-        departed.push(elem);
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-      this.drawTemplateElem({
+      const options = {
         imgInfo: Template.getImgFromTransportType(elem.thread.transport_type),
         name: elem.thread.number ? `${elem.thread.number} ${elem.thread.title}` : `${elem.thread.title}`,
         carrier: elem.thread && elem.thread.carrier ? elem.thread.carrier.title : '',
@@ -188,8 +202,17 @@ class Template {
         titleFrom: elem.from.popular_title ? elem.from.popular_title : elem.from.title,
         titleTo: elem.to.popular_title ? elem.to.popular_title : elem.to.title,
         tickets: this.renderTickets(tickets)
-      });
+      };
+      let offset = departure - new Date();
+      if (offset <= 0) {
+        departedCount += 1;
+        this.drawTemplateElem(options, this.departedItemsList);
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+      this.drawTemplateElem(options, this.itemsList);
     }
+    if (departedCount) this.showDeparted(departedCount);
   }
 }
 
