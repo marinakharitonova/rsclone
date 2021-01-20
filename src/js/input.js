@@ -70,7 +70,7 @@ class Input {
   }
 
   setData(options) {
-    let { value, result, code } = options;
+    let { value = '', result = [], code = '' } = options;
     this.result = result;
     this.input.value = value;
     this.input.setAttribute('data-code', code);
@@ -78,6 +78,10 @@ class Input {
 
   getValue() {
     return this.input.dataset.code;
+  }
+
+  getName() {
+    return this.input.value;
   }
 }
 

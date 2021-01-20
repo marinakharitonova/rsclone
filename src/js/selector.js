@@ -11,17 +11,20 @@ class Selector {
     this.container.addEventListener('click', this.selectorClickListener.bind(this));
   }
 
+  setActiveTab(attr) {
+    for (let item of this.selectorItems) {
+      item.classList.remove('active');
+    }
+    let elem = this.container.querySelector(`.selector__item[data-value=${attr}]`);
+    elem.classList.add('active');
+  }
+
   selectorClickListener(e) {
     const elem = e.target;
 
     const currentItem = elem.closest('.selector__item');
 
-    for (let item of this.selectorItems) {
-      item.classList.remove('active');
-    }
-
     if (currentItem) {
-      currentItem.classList.add('active');
       this.cb(currentItem.dataset.value);
     }
   }

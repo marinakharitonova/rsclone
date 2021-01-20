@@ -48,12 +48,26 @@ class InputContainer {
     };
   }
 
+  getState() {
+    return {
+      from: this.fromInput.getName(),
+      to: this.toInput.getName(),
+      date: this.dateInput.getText()
+    };
+  }
+
   stayLight() {
     this.container.classList.add('light');
   }
 
   removeLight() {
     this.container.classList.remove('light');
+  }
+
+  setData(dataInputFrom = {}, dataInputTo = {}, dataInputDate = {}) {
+    this.fromInput.setData(dataInputFrom);
+    this.toInput.setData(dataInputTo);
+    this.dateInput.setData(dataInputDate);
   }
 }
 

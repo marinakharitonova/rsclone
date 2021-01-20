@@ -8,3 +8,10 @@ body{
   padding: 20px;
 }
 
+.main{
+  min-height: 1155px;
+  @media #{$sm} {
+    min-height: 640px;
+  }
+}
+
