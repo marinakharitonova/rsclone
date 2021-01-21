@@ -5,9 +5,40 @@
 
   &__fields{
     transition: opacity 0.3s;
+    position: relative;
     &.light{
       opacity: 0.5;
       pointer-events: none;
+    }
+  }
+
+  &__notification{
+    position: absolute;
+    padding: 10px;
+    background: $notificationColor;
+    border-radius: 7px;
+    text-transform: uppercase;
+    color: $white;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    top: -50px;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s;
+    &.active{
+      z-index: 3;
+      opacity: 1;
+    }
+
+    &:after{
+      content: '';
+      position: absolute;
+      right: 20px;
+      bottom: -30px;
+      border: 15px solid transparent;
+      border-top: 15px solid $notificationColor;
     }
   }
 

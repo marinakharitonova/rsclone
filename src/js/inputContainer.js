@@ -13,6 +13,7 @@ class InputContainer {
     this.toInput = new Input(this.container.querySelector('.cities__input_to'));
     this.dateInput = new DateInput(this.container.querySelector('.cities__input_date'));
     this.changeDirectionBtn = this.container.querySelector('.cities__change');
+    this.notification = this.container.querySelector('.cities__notification');
 
     document.addEventListener('click', this.documentClickListener.bind(this));
     this.changeDirectionBtn.addEventListener('click', this.changeDirectionBtnClickListener.bind(this));
@@ -68,6 +69,13 @@ class InputContainer {
     this.fromInput.setData(dataInputFrom);
     this.toInput.setData(dataInputTo);
     this.dateInput.setData(dataInputDate);
+  }
+
+  showNotification() {
+    this.notification.classList.add('active');
+    setTimeout(()=> {
+      this.notification.classList.remove('active');
+    }, 1000);
   }
 }
 

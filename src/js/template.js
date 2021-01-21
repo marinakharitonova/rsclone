@@ -13,6 +13,7 @@ class Template {
     this.preloader = this.container.querySelector('.template__preloader');
     this.departedBlock = this.container.querySelector('.template__departed');
     this.departedItemsList = this.container.querySelector('.template__list-departed');
+    this.noRacesNotification = this.container.querySelector('.template__no-races');
 
     document.addEventListener('click', (e) => {
       const elem = e.target;
@@ -152,6 +153,7 @@ class Template {
     this.itemsList.classList.remove('hide');
     this.noTransportNotification.classList.add('hide');
     this.departedBlock.classList.add('hide');
+    this.noRacesNotification.classList.add('hide');
     this.itemsList.innerHTML = '';
     this.departedItemsList.innerHTML = '';
   }
@@ -178,6 +180,11 @@ class Template {
     this.departedBlock.querySelector('.template__departed-col').textContent = col;
   }
 
+  showNoRaces() {
+    this.itemsList.classList.add('hide');
+    this.noRacesNotification.classList.remove('hide');
+  }
+
   render(data, searchDate) {
     console.log(data);
     this.setDefaultView();
@@ -186,6 +193,7 @@ class Template {
       return false;
     }
     let departedCount = 0;
+    let availableRacesCount = 0;
     for (let elem of data.segments) {
       const tickets = elem.tickets_info && elem.tickets_info.places ? elem.tickets_info.places : null;
       const departure = new Date(elem.departure);
@@ -209,10 +217,13 @@ class Template {
         this.drawTemplateElem(options, this.departedItemsList);
         // eslint-disable-next-line no-continue
         continue;
+      } else {
+        availableRacesCount += 1;
+        this.drawTemplateElem(options, this.itemsList);
       }
-      this.drawTemplateElem(options, this.itemsList);
     }
     if (departedCount) this.showDeparted(departedCount);
+    if (availableRacesCount === 0) this.showNoRaces();
   }
 }
 

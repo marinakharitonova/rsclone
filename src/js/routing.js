@@ -11,7 +11,6 @@ class Routing {
 
   static parseUrl(str) {
     let url = new URL(str);
-    const path = url.pathname;
     let params = {};
     if (url.searchParams.get('from')) {
       params.from = url.searchParams.get('from');
@@ -19,14 +18,7 @@ class Routing {
       params.date = url.searchParams.get('date');
       params.transport = url.searchParams.get('transport');
     }
-    return {
-      pathname: path,
-      params: params
-    };
-  }
-
-  static popState() {
-    Routing.parseUrl(location.href);
+    return params;
   }
 }
 

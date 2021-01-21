@@ -21,30 +21,13 @@ class App {
     this.inputContainer = new InputContainer(document.querySelector('.cities__fields'));
     this.template = new Template(document.querySelector('.main__template'));
     this.homeContainer = new HomeContainer(document.querySelector('.main__home'));
+    this.logo = document.querySelector('.logo-link');
 
     this.searchButton.addEventListener('click', this.searchButtonClickListener.bind(this));
 
     window.onpopstate = this.historyPopstateListener.bind(this);
 
-    document.addEventListener('DOMContentLoaded', () => {
-      let urlPieces = Routing.parseUrl(location.href);
-      console.log(urlPieces);
-      if (urlPieces.params.transport) {
-        this.changeMode(urlPieces.params.transport);
-        let pointFrom = App.binarySearch(DATA, urlPieces.params.from, 0, DATA.length - 1);
-        let pointTo = App.binarySearch(DATA, urlPieces.params.to, 0, DATA.length - 1);
-        const forInputData = { value: pointFrom.title, result: [], code: urlPieces.params.from };
-        const toInputData = { value: pointTo.title, result: [], code: urlPieces.params.to };
-        const dateInputData = { value: urlPieces.params.date, dataValue: urlPieces.params.date };
-        this.inputContainer.setData(forInputData, toInputData, dateInputData);
-        this.searchTrip(urlPieces.params, false);
-      } else {
-        this.template.hide();
-        this.homeContainer.show();
-        this.inputContainer.setData();
-        this.changeMode('all');
-      }
-    });
+    document.addEventListener('DOMContentLoaded', this.domContentLoadedEventListener.bind(this));
 
     // this.getUserGeolocation();
   }
@@ -63,6 +46,34 @@ class App {
     const middleCode = Number(data[middle].code.slice(1));
     if (targetCode > middleCode) return this.binarySearch(data, target, middle, end);
     if (targetCode < middleCode) return this.binarySearch(data, target, start, middle);
+  }
+
+  renderSearch(params, from, to, date) {
+    const forInputData = { value: from, result: [], code: params.from };
+    const toInputData = { value: to, result: [], code: params.to };
+    const dateInputData = { value: date, dataValue: params.date };
+    this.inputContainer.setData(forInputData, toInputData, dateInputData);
+    this.changeMode(params.transport);
+    this.searchTrip(params, false);
+  }
+
+  domContentLoadedEventListener() {
+    let urlParams = Routing.parseUrl(location.href);
+
+    if (urlParams.from) {
+      const pointFrom = App.binarySearch(DATA, urlParams.from, 0, DATA.length - 1).title;
+      const titleFrom = pointFrom.split(',')[0];
+      const pointTo = App.binarySearch(DATA, urlParams.to, 0, DATA.length - 1).title;
+      const titleTo = pointTo.split(',')[0];
+      const date = new Date(Date.parse(urlParams.date)).toLocaleDateString();
+      this.renderSearch(urlParams, titleFrom, titleTo, date);
+    }
+  }
+
+  renderHomePage() {
+    this.template.hide();
+    this.homeContainer.show();
+    this.inputContainer.setData();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -89,18 +100,11 @@ class App {
 
   historyPopstateListener(e) {
     const state = e.state;
-    let urlPieces = Routing.parseUrl(location.href);
-    if (urlPieces.pathname === '/search') {
-      this.changeMode(urlPieces.params.transport);
-      const forInputData = { value: state.from, result: [], code: urlPieces.params.from };
-      const toInputData = { value: state.to, result: [], code: urlPieces.params.to };
-      const dateInputData = { value: state.date, dataValue: urlPieces.params.date };
-      this.inputContainer.setData(forInputData, toInputData, dateInputData);
-      this.searchTrip(urlPieces.params, false);
-    } else if (urlPieces.pathname === '/') {
-      this.template.hide();
-      this.homeContainer.show();
-      this.inputContainer.setData();
+    let urlParams = Routing.parseUrl(location.href);
+    if (urlParams.from) {
+      this.renderSearch(urlParams, state.from, state.to, state.date);
+    } else {
+      this.renderHomePage();
     }
   }
 
@@ -140,6 +144,8 @@ class App {
             }, this.inputContainer.getState());
           }
         });
+    } else {
+      this.inputContainer.showNotification();
     }
   }
 }

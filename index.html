@@ -15,13 +15,12 @@
 <body>
 <header class="header">
     <div class="container">
-        <a href=""id="todownload">download</a>
         <div class="header__container">
             <div class="header__left">
                 <div class="header__logo">
                     <a href="https://yandex.ru/" target="_blank" class="header__logo-text"><img
                             src="src/assets/img/yandex-logo.png" alt="Яндекс"></a>
-                    <a href="#" target="_blank"><img src="src/assets/img/rasp-logo.png" alt="Расписания"></a>
+                    <a href="/" class="logo-link"><img src="src/assets/img/rasp-logo.png" alt="Расписания"></a>
                 </div>
                 <div class="header__text">RS CLone</div>
             </div>
@@ -89,6 +88,8 @@
                         <button class="link link-date" data-value="all">на все дни</button>
                     </div>
                 </div>
+
+                <div class="cities__notification">Задайте параметры поиска</div>
 
                 <button class="cities__button">Найти</button>
             </div>
@@ -254,6 +255,9 @@
             <div class="template__no-transport hide">
                 <h2>Рейсов не найдено :(</h2>
                 <p class="text">Посмотрите расписание на все дни, варианты проезда всеми видами транспорта или выберите другой пункт назначения.</p>
+            </div>
+            <div class="template__no-races hide">
+                <p class="text">Нет доступных рейсов на сегодня</p>
             </div>
         </div>
     </div>
