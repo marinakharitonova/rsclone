@@ -4,6 +4,7 @@ import RequestHelper from './requestHelper';
 import Template from './template';
 import HomeContainer from './homeContainer';
 import Routing from './routing';
+import Location from './location';
 
 import DATA from './data';
 
@@ -13,7 +14,6 @@ class App {
   }
 
   init() {
-    this.API_KEY = 'b5d371b3-5e8a-4121-bf07-b76f8f02df8c';
     this.mode = 'all';
     this.searchButton = document.querySelector('.cities__button');
 
@@ -21,15 +21,13 @@ class App {
     this.inputContainer = new InputContainer(document.querySelector('.cities__fields'));
     this.template = new Template(document.querySelector('.main__template'));
     this.homeContainer = new HomeContainer(document.querySelector('.main__home'));
-    this.logo = document.querySelector('.logo-link');
+    this.location = new Location();
 
     this.searchButton.addEventListener('click', this.searchButtonClickListener.bind(this));
 
     window.onpopstate = this.historyPopstateListener.bind(this);
 
     document.addEventListener('DOMContentLoaded', this.domContentLoadedEventListener.bind(this));
-
-    // this.getUserGeolocation();
   }
 
   static binarySearch(data, target, start, end) {
@@ -76,28 +74,6 @@ class App {
     this.inputContainer.setData();
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  getUserGeolocation() {
-    // eslint-disable-next-line no-undef
-    ymaps.ready(() => {
-      // eslint-disable-next-line no-undef
-      var location = ymaps.geolocation.get();
-
-      location.then(
-        (result) => {
-          let userAddress = result.geoObjects.get(0).properties.get('description');
-          let userCoodinates = result.geoObjects.get(0).geometry.getCoordinates();
-
-          console.log(userAddress);
-          console.log(userCoodinates);
-        },
-        (err) => {
-          console.log('Ошибка: ' + err);
-        }
-      );
-    });
-  }
-
   historyPopstateListener(e) {
     const state = e.state;
     let urlParams = Routing.parseUrl(location.href);
@@ -124,14 +100,14 @@ class App {
     } = params;
     const dateParam = date ? `&date=${date}` : '';
     const transportParm = this.mode !== 'all' ? `&transport_types=${this.mode}` : '';
-    const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${this.API_KEY}&format=json&from=${from}&to=${to}&lang=ru_RU&page=1${dateParam}${transportParm}`;
+    const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${RequestHelper.API_KEY}&format=json&from=${from}&to=${to}&lang=ru_RU&page=1${dateParam}${transportParm}`;
 
     if (from && to) {
       this.homeContainer.hide();
       this.template.show();
       this.template.showPreloader();
       this.inputContainer.stayLight();
-      RequestHelper.sendRequest(url, date,
+      RequestHelper.sendRequest(url,
         (...args) => {
           this.inputContainer.removeLight();
           this.template.render.call(this.template, ...args);
@@ -143,7 +119,7 @@ class App {
               transport: this.mode
             }, this.inputContainer.getState());
           }
-        });
+        }, date);
     } else {
       this.inputContainer.showNotification();
     }
