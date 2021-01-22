@@ -4,9 +4,12 @@
     width: 25px;
 
     &_arrow{
-      margin-right: 0;
-      margin-left: auto;
       transition: transform 0.3s;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      right: -15px;
     }
   }
   &__name{
@@ -24,22 +27,17 @@
       &:hover{
         color: $linkHoverColor;
       }
-      &.active{
-        .station__img_arrow{
-          transform: rotate(180deg);
-        }
-      }
     }
   }
   &__item{
-    margin-bottom: 5px;
-    min-width: 50%;
+    margin-bottom: 7px;
+    min-width: 100%;
   }
   .link{
     font-size: 15px;
     line-height: 18px;
   }
   &__list{
-    @include flex(row wrap, flex-start, flex-start);
+    @include flex(column nowrap, flex-start, flex-start);
   }
 }

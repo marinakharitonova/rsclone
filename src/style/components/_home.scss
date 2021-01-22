@@ -85,6 +85,9 @@
         opacity: 1;
         z-index: 2;
       }
+      .station__img_arrow{
+        transform: rotate(180deg);
+      }
     }
 
     &_list{

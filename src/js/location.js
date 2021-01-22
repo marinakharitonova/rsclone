@@ -10,8 +10,7 @@ class Location {
     this.buttonHome = document.querySelector('.link_home');
     this.homeLocation = document.querySelector('.home__location');
     this.homePlaces = document.querySelector('.home__places');
-    this.homeInput = document.querySelector('.home__input');
-    this.resultMaxLength = 10;
+    this.stationsMaxCount = 10;
 
     this.getUserGeolocation();
   }
@@ -122,10 +121,10 @@ class Location {
     if (places.length === 0) return false;
     for (let elem of places) {
       if (elem.stations.length === 0) continue;
-      const mode = elem.stations.length <= 16 ? 'block' : 'list';
+      const mode = elem.stations.length <= this.stationsMaxCount ? 'block' : 'list';
       const stations = this.renderStations(elem.stations, elem.type, mode);
       let template = '';
-      if (elem.stations.length <= 16) {
+      if (elem.stations.length <= 13) {
         template = `<div class="home__station station">
                         <div class="station__caption">
                             <img src="${elem.img}" alt="" class="station__img">

@@ -3,7 +3,7 @@ class RequestHelper {
 
   static sendRequest(url, cb, arg = '') {
     const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-    fetch(proxyurl + url)
+    fetch(url)
       .then(response => response.json())
       .then(contents => cb(contents, arg))
       .catch(() => console.log('Can’t access ' + url + ' response. Blocked by browser?'));
@@ -11,7 +11,7 @@ class RequestHelper {
 
   static sendManyRequests(urls, cb){
     const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-    let requests = urls.map(url => fetch(proxyurl + url));
+    let requests = urls.map(url => fetch(url));
 
     Promise.all(requests)
       .then(responses => Promise.all(responses.map(r => r.json())))
