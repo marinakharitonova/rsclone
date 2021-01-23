@@ -21,7 +21,7 @@ class App {
     this.inputContainer = new InputContainer(document.querySelector('.cities__fields'));
     this.template = new Template(document.querySelector('.main__template'));
     this.homeContainer = new HomeContainer(document.querySelector('.main__home'));
-    this.location = new Location();
+    this.location = new Location(this.inputContainer.setData.bind(this.inputContainer));
 
     this.searchButton.addEventListener('click', this.searchButtonClickListener.bind(this));
 
@@ -87,6 +87,15 @@ class App {
   searchButtonClickListener() {
     const params = this.inputContainer.getParams();
     this.searchTrip(params);
+
+    let codeFrom = params.from;
+    let codeTo = params.to;
+    let nameFrom = this.inputContainer.getState().from;
+    let nameTo = this.inputContainer.getState().to;
+
+    this.location.makeLastCitiesData({
+      nameFrom, nameTo, codeFrom, codeTo
+    });
   }
 
   changeMode(mode) {
@@ -95,6 +104,7 @@ class App {
   }
 
   searchTrip(params, canSetHistory = true) {
+    this.template.setDefaultView();
     const {
       from, to, date
     } = params;

@@ -1,8 +1,8 @@
 import RequestHelper from './requestHelper';
-import DATA from './data';
 
 class Location {
-  constructor() {
+  constructor(cb) {
+    this.changeInputsCb = cb;
     this.init();
   }
 
@@ -11,11 +11,114 @@ class Location {
     this.homeLocation = document.querySelector('.home__location');
     this.homePlaces = document.querySelector('.home__places');
     this.stationsMaxCount = 10;
+    this.sitiesLast = document.querySelector('.cities__last');
+    this.maxLastCitiesLength = 15;
 
-    this.getUserGeolocation();
+    this.findDataInSessionStorage();
+
+    if (localStorage.getItem('lastCities')) {
+      this.renderLastCities(JSON.parse(localStorage.getItem('lastCities')));
+    }
+
+    this.sitiesLast.addEventListener('click', this.citiesLastClickListener.bind(this));
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  citiesLastClickListener(e) {
+    const elem = e.target;
+
+    const currentItem = elem.closest('.city-btn');
+    if (currentItem) {
+      const dataInputFrom = {
+        value: currentItem.dataset.nameFrom,
+        code: currentItem.dataset.codeFrom,
+        result: []
+      };
+
+      const dataInputTo = {
+        value: currentItem.dataset.nameTo,
+        code: currentItem.dataset.codeTo,
+        result: []
+      };
+
+      this.changeInputsCb(dataInputFrom, dataInputTo);
+    }
+  }
+
+  makeLastCitiesData(data) {
+    const {
+      nameFrom, nameTo, codeFrom, codeTo
+    } = data;
+    let lastCities = [];
+    if (localStorage.getItem('lastCities')) {
+      lastCities = JSON.parse(localStorage.getItem('lastCities'));
+      if (lastCities.length > this.maxLastCitiesLength) {
+        localStorage.removeItem('lastCities');
+        lastCities = [];
+      }
+    }
+    if (lastCities.findIndex(elem => elem.codeTo === codeTo && elem.codeFrom === codeFrom) === -1) {
+      lastCities = [{
+        codeFrom,
+        nameFrom,
+        codeTo,
+        nameTo
+      }].concat(lastCities);
+      console.log(lastCities);
+    }
+    localStorage.setItem('lastCities', JSON.stringify(lastCities));
+    this.renderLastCities(lastCities);
+  }
+
+  renderLastCities(data) {
+    if (data.length === 0) return false;
+    this.sitiesLast.innerHTML = '';
+
+    let firstPart = data.length > 3 ? data.slice(0, 3) : data;
+    let secondPart = data.length > 3 ? data.slice(3) : [];
+    for (let elem of firstPart) {
+      let template = `<button class="link city-btn" 
+                        data-code-from="${elem.codeFrom}" 
+                        data-code-to="${elem.codeTo}"
+                        data-name-from="${elem.nameFrom}"
+                        data-name-to="${elem.nameTo}"
+                        >
+                        ${elem.nameFrom}-${elem.nameTo}
+                      </button>`;
+      this.sitiesLast.insertAdjacentHTML('beforeend', template);
+    }
+
+    let list = '';
+    for (let elem of secondPart) {
+      let template = `<li class="list__item city-btn" 
+                          data-code-from="${elem.codeFrom}" 
+                          data-code-to="${elem.codeTo}"
+                          data-name-from="${elem.nameFrom}"
+                          data-name-to="${elem.nameTo}"
+                          >
+                       ${elem.nameFrom}-${elem.nameTo}
+                      </li>`;
+      list += template;
+    }
+    let secodTemplate = `<div class="link-wrapper">
+                            <button class="link">● ● ●</button>
+                            <ul class="list list_last">
+                                ${list}
+                            </ul>
+                        </div>`;
+    if (list.length > 0) this.sitiesLast.insertAdjacentHTML('beforeend', secodTemplate);
+  }
+
+  findDataInSessionStorage() {
+    if (sessionStorage.getItem('locationName') && sessionStorage.getItem('nearestStations')) {
+      const name = sessionStorage.getItem('locationName');
+      const nearestStations = JSON.parse(sessionStorage.getItem('nearestStations'));
+      this.setName(name);
+      this.renderLocationBlock(nearestStations);
+    } else {
+      this.getUserGeolocation();
+    }
+  }
+
   getUserGeolocation() {
     // eslint-disable-next-line no-undef
     ymaps.ready(() => {
@@ -25,10 +128,10 @@ class Location {
         (result) => {
           let userAddress = result.geoObjects.get(0).properties.get('description');
           let userCoordinates = result.geoObjects.get(0).geometry.getCoordinates();
-
           let splitAddress = userAddress.split(',');
-
-          this.setName(splitAddress[splitAddress.length - 1]);
+          const name = splitAddress[splitAddress.length - 1];
+          this.setName(name);
+          sessionStorage.setItem('locationName', name);
           this.getNearestStations(userCoordinates);
         },
         (err) => {
@@ -40,17 +143,15 @@ class Location {
 
   getNearestStations(coords) {
     const dist = 50;
-    const lat = 55.7522;
-    const long = 37.6156;
+    const lat = coords[0];
+    const long = coords[1];
     const urlTrain = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=train_station`;
     const urlPlane = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=airport`;
     const urlSuburban = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=station`;
     const urlBus = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=bus_station`;
     RequestHelper.sendManyRequests([urlBus, urlPlane, urlSuburban, urlTrain], (data) => {
-      console.log(data);
-      const localData = this.makeDataForRender(data);
-      this.renderPlaces(localData);
-      this.homeLocation.classList.remove('hide');
+      sessionStorage.setItem('nearestStations', JSON.stringify(data));
+      this.renderLocationBlock(data);
     });
   }
 
@@ -58,7 +159,13 @@ class Location {
     this.buttonHome.textContent = name;
   }
 
-  renderStations(stations, type, mode = 'block') {
+  renderLocationBlock(data) {
+    const localData = Location.makeDataForRender(data);
+    this.renderPlaces(localData);
+    this.homeLocation.classList.remove('hide');
+  }
+
+  static renderStations(stations, type, mode = 'block') {
     let res = '';
     let linkParam = '';
     if (type === 'suburban') {
@@ -81,7 +188,7 @@ class Location {
     return res;
   }
 
-  makeDataForRender(data) {
+  static makeDataForRender(data) {
     const trainStation = data[3].stations;
     const busStation = data[0].stations;
     const station = data[2].stations;
@@ -116,13 +223,12 @@ class Location {
   }
 
   renderPlaces(places) {
-    console.log(places);
     this.homePlaces.innerHTML = '';
     if (places.length === 0) return false;
     for (let elem of places) {
       if (elem.stations.length === 0) continue;
       const mode = elem.stations.length <= this.stationsMaxCount ? 'block' : 'list';
-      const stations = this.renderStations(elem.stations, elem.type, mode);
+      const stations = Location.renderStations(elem.stations, elem.type, mode);
       let template = '';
       if (elem.stations.length <= 13) {
         template = `<div class="home__station station">

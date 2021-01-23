@@ -15,6 +15,9 @@ class Template {
     this.departedItemsList = this.container.querySelector('.template__list-departed');
     this.noRacesNotification = this.container.querySelector('.template__no-races');
 
+    this.successResAudio = document.getElementById('success-result');
+    this.noResAudio = document.getElementById('no-result');
+
     document.addEventListener('click', (e) => {
       const elem = e.target;
 
@@ -25,6 +28,14 @@ class Template {
         btnText.textContent = this.departedItemsList.classList.contains('hide') ? 'Показать ушедшие' : 'Скрыть ушедшие';
       }
     });
+  }
+
+  static playSound(audio) {
+    if (!audio) return;
+    // eslint-disable-next-line no-param-reassign
+    audio.currentTime = 0;
+    audio.play()
+      .catch(err => console.log(err));
   }
 
   show() {
@@ -222,8 +233,16 @@ class Template {
         this.drawTemplateElem(options, this.itemsList);
       }
     }
+    if (availableRacesCount > 0) Template.playSound(this.successResAudio);
     if (departedCount) this.showDeparted(departedCount);
-    if (availableRacesCount === 0) this.showNoRaces();
+    if (availableRacesCount === 0 && departedCount !== 0) {
+      this.showNoRaces();
+      Template.playSound(this.noResAudio);
+    }
+    if (availableRacesCount === 0 && departedCount === 0) {
+      Template.playSound(this.noResAudio);
+      this.showNoTransport();
+    }
   }
 }
 

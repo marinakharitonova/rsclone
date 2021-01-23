@@ -9,6 +9,9 @@
   opacity: 0;
   transition: opacity 0.3s;
   width: max-content;
+  @media #{$xs}{
+    max-width: 300px;
+  }
 
   &_last{
     top: 20px;
@@ -43,6 +46,11 @@
     left: 370px;
     max-height: 400px;
     overflow-y: scroll;
+    @media #{$xs}{
+      max-width: 300px;
+      right: -5px;
+      left: auto;
+    }
   }
 }
 

@@ -1,5 +1,8 @@
 .advert{
   @include flex(row nowrap, flex-start, flex-start);
+  @media #{$xs}{
+    flex-direction: column;
+  }
 
   &__item{
     flex-grow: 1;
@@ -9,6 +12,10 @@
     transition: background-color 0.3s;
     text-align: center;
     @include flex(column nowrap, center, center);
+    @media #{$xs}{
+      width: 100%;
+      border-right: 1px solid $advertBorder;
+    }
 
     &:last-child{
       border-right: 1px solid $advertBorder;

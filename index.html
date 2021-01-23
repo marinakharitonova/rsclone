@@ -20,7 +20,8 @@
                 <div class="header__logo">
                     <a href="https://yandex.ru/" target="_blank" class="header__logo-text"><img
                             src="src/assets/img/yandex-logo.png" alt="Яндекс"></a>
-                    <a href="/" class="logo-link"><img src="src/assets/img/rasp-logo.png" alt="Расписания"></a>
+                    <a href="https://rolling-scopes-school.github.io/marinakharitonova-JS2020Q3/rsclone/"
+                       class="logo-link"><img src="src/assets/img/rasp-logo.png" alt="Расписания"></a>
                 </div>
                 <div class="header__text">RS CLone</div>
             </div>
@@ -63,20 +64,7 @@
                             <ul class="list"></ul>
                         </div>
                     </div>
-                    <div class="cities__last">
-                        <button class="link">Рязань-Москва</button>
-                        <button class="link">Рязань-Сасово</button>
-                        <button class="link">Рязань-Ряжск</button>
-                        <div class="link-wrapper">
-                            <button class="link">● ● ●</button>
-                            <ul class="list list_last">
-                                <li class="list__item">Рязань-Москва</li>
-                                <li class="list__item">Рязань-Москва</li>
-                                <li class="list__item">Рязань-Москва</li>
-                            </ul>
-                        </div>
-
-                    </div>
+                    <div class="cities__last"></div>
                 </div>
                 <div class="cities__date">
                     <div class="cities__input-wrapper cities__input-wrapper_date">
@@ -146,7 +134,7 @@
         </div>
         <div class="template main__template hide">
             <div class="template__preloader">
-                <img src="src/assets/img/plane.png" alt="" class="template__preloader-img">
+                <img src="src/assets/img/animation-bus.gif" alt="" class="template__preloader-img">
                 <p class="text">Идет поиск подходящих вариантов</p>
             </div>
 
@@ -159,12 +147,14 @@
             <ul class="template__list hide"></ul>
             <div class="template__no-transport hide">
                 <h2>Рейсов не найдено :(</h2>
-                <p class="text">Посмотрите расписание на все дни, варианты проезда всеми видами транспорта или выберите другой пункт назначения.</p>
+                <p class="text">Посмотрите расписание на другие дни, варианты проезда всеми видами транспорта или выберите другой пункт назначения.</p>
             </div>
             <div class="template__no-races hide">
                 <p class="text">Нет доступных рейсов на сегодня</p>
             </div>
         </div>
+        <audio src="src/assets/sound/result.mp3" id="success-result"></audio>
+        <audio src="src/assets/sound/no-result.mp3" id="no-result"></audio>
     </div>
 </section>
 <footer class="footer">

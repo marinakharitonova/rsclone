@@ -10,6 +10,14 @@
       background: $templateBg;
       padding: 10px;
       margin-bottom: 12px;
+
+      .template__block_time{
+        @media #{$xs}{
+          padding-bottom: 0;
+          margin-bottom: 0;
+          border-bottom: none;
+        }
+      }
     }
   }
 
@@ -18,6 +26,9 @@
     border-bottom: 1px solid $selectorBorderColor;
     @include flex(row nowrap, flex-start, flex-start);
     background: $white;
+    @media #{$xs}{
+      flex-direction: column;
+    }
 
     &:last-child{
       border-bottom: 0;
@@ -28,19 +39,39 @@
     padding-right: 60px;
     &:last-child{
       padding-right: 0;
+      @media #{$xs}{
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+    }
+    @media #{$xs}{
+      padding-right: 0;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed $selectorBorderColor;
+      padding-bottom: 5px;
     }
 
     &_time{
       @include flex(row nowrap, space-between, flex-start);
       width: 40%;
+      @media #{$xs}{
+        width: 100%;
+      }
     }
 
     &_price{
       width: 20%;
+      @media #{$xs}{
+        width: 100%;
+      }
     }
 
     &_name{
       width: 40%;
+      @media #{$xs}{
+        width: 100%;
+      }
     }
   }
 
@@ -140,6 +171,22 @@
 
     &-img{
       margin-bottom: 20px;
+      @media #{$sm}{
+        margin-top: -120px;
+      }
+      @media #{$xs}{
+        width: 300px;
+        margin-top: -50px;
+      }
+    }
+
+    .text{
+      font-size: 20px;
+      line-height: 30px;
+      margin-top: -170px;
+      @media #{$xs}{
+        margin-top: -100px;
+      }
     }
   }
 

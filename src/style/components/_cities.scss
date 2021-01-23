@@ -1,6 +1,9 @@
 .cities{
   &__fields, &__names{
     @include flex(row nowrap, flex-start, flex-start);
+    @media #{$xs}{
+      flex-direction: column;
+    }
   }
 
   &__fields{
@@ -44,6 +47,9 @@
 
   &__places{
     flex-grow: 1;
+    @media #{$xs}{
+      width: 100%;
+    }
   }
 
   &__names{
@@ -71,9 +77,15 @@
 
     &_from, &_to{
       border-right-color: transparent;
+      @media #{$xs}{
+        border-right: 1px solid $selectorBorderColor;
+      }
     }
     &_to, &_date{
       border-left-color: transparent;
+      @media #{$xs}{
+        border-left: 1px solid $selectorBorderColor;
+      }
     }
 
     &_date{
@@ -83,9 +95,15 @@
     &-wrapper{
       position: relative;
       flex-grow: 1;
+      @media #{$xs}{
+        width: 100%;
+      }
 
       &_date{
         margin-bottom: 10px;
+        @media #{$xs}{
+          margin-bottom: 0;
+        }
         &:before{
           content: '';
           position: absolute;
@@ -95,6 +113,9 @@
           width: 1px;
           background: $selectorBorderColor;
           z-index: 2;
+          @media #{$xs}{
+            content: none;
+          }
         }
         &:after{
           position: absolute;
@@ -105,7 +126,7 @@
           right: 5px;
           width: 35px;
           height: 27px;
-          background: url("../src/assets/img/calendar.png") no-repeat center / cover;
+          background: url("./src/assets/img/calendar.png") no-repeat center / cover;
         }
       }
     }
@@ -120,6 +141,10 @@
     border-radius: 0 3px 3px 0;
     transition: background-color 0.3s;
     border: 1px solid $citiesButtonColor;
+    @media #{$xs}{
+      width: 100%;
+      border-radius: 3px;
+    }
 
     &:hover{
       background-color: $selectBorderActive;
@@ -132,6 +157,11 @@
     position: relative;
     border-top: 1px solid $selectorBorderColor;
     border-bottom: 1px solid $selectorBorderColor;
+    @media #{$xs}{
+      border-top: 0;
+      border-bottom: 0;
+      align-self: center;
+    }
     &:after, &:before{
       content: '';
       position: absolute;
@@ -141,6 +171,9 @@
       width: 1px;
       background: $selectorBorderColor;
       z-index: 2;
+      @media #{$xs}{
+        content: none;
+      }
     }
     &:before{
       right: auto;
@@ -162,6 +195,10 @@
 
   &__date{
     flex-grow: 1;
+    @media #{$xs}{
+      width: 100%;
+      margin-bottom: 10px;
+    }
     &-text{
       cursor: default;
     }
@@ -170,5 +207,17 @@
   &__last{
     cursor: default;
     @include flex(row nowrap, flex-start, flex-start);
+    @media #{$xs}{
+      display: none;
+    }
+
+    .link-wrapper{
+      &:hover{
+        .list_last{
+          opacity: 1;
+          z-index: 3;
+        }
+      }
+    }
   }
 }

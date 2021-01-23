@@ -1,10 +1,13 @@
 class Routing {
   static setUrl(urlAddition, params, state) {
-    let url = new URL(`${location.origin}`);
+    let url = new URL(`${location.href}`);
+    console.log(url);
 
     for (let key in params) {
       url.searchParams.set(key, params[key]);
     }
+
+    console.log(url);
 
     history.pushState(state, null, url.href);
   }
