@@ -157,6 +157,7 @@ class Template {
   showNoTransport() {
     this.itemsList.classList.add('hide');
     this.noTransportNotification.classList.remove('hide');
+    Template.playSound(this.noResAudio);
   }
 
   setDefaultView() {
@@ -238,10 +239,6 @@ class Template {
     if (availableRacesCount === 0 && departedCount !== 0) {
       this.showNoRaces();
       Template.playSound(this.noResAudio);
-    }
-    if (availableRacesCount === 0 && departedCount === 0) {
-      Template.playSound(this.noResAudio);
-      this.showNoTransport();
     }
   }
 }

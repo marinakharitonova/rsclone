@@ -90,6 +90,9 @@
 
     &_date{
       cursor: pointer;
+      position: relative;
+      z-index: 2;
+      background: transparent;
     }
 
     &-wrapper{

@@ -5,6 +5,7 @@ import Template from './template';
 import HomeContainer from './homeContainer';
 import Routing from './routing';
 import Location from './location';
+import ModalWindow from './modalWindow';
 
 import DATA from './data';
 
@@ -22,6 +23,7 @@ class App {
     this.template = new Template(document.querySelector('.main__template'));
     this.homeContainer = new HomeContainer(document.querySelector('.main__home'));
     this.location = new Location(this.inputContainer.setData.bind(this.inputContainer));
+    this.modalWindow = new ModalWindow();
 
     this.searchButton.addEventListener('click', this.searchButtonClickListener.bind(this));
 
@@ -56,6 +58,8 @@ class App {
   }
 
   domContentLoadedEventListener() {
+    this.modalWindow.checkOpen();
+
     let urlParams = Routing.parseUrl(location.href);
 
     if (urlParams.from) {
@@ -110,7 +114,7 @@ class App {
     } = params;
     const dateParam = date ? `&date=${date}` : '';
     const transportParm = this.mode !== 'all' ? `&transport_types=${this.mode}` : '';
-    const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${RequestHelper.API_KEY}&format=json&from=${from}&to=${to}&lang=ru_RU&page=1${dateParam}${transportParm}`;
+    const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${RequestHelper.getKey()}&format=json&from=${from}&to=${to}&lang=ru_RU&page=1${dateParam}${transportParm}`;
 
     if (from && to) {
       this.homeContainer.hide();

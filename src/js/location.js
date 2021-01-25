@@ -145,10 +145,11 @@ class Location {
     const dist = 50;
     const lat = coords[0];
     const long = coords[1];
-    const urlTrain = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=train_station`;
-    const urlPlane = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=airport`;
-    const urlSuburban = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=station`;
-    const urlBus = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${RequestHelper.API_KEY}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=bus_station`;
+    const key = RequestHelper.getKey();
+    const urlTrain = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=train_station`;
+    const urlPlane = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=airport`;
+    const urlSuburban = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=station`;
+    const urlBus = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=bus_station`;
     RequestHelper.sendManyRequests([urlBus, urlPlane, urlSuburban, urlTrain], (data) => {
       sessionStorage.setItem('nearestStations', JSON.stringify(data));
       this.renderLocationBlock(data);
