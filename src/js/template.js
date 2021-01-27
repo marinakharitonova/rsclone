@@ -175,7 +175,7 @@ class Template {
     this.departedItemsList.innerHTML = '';
   }
 
-  renderTickets(data) {
+  static renderTickets(data) {
     if (!data || data.length === 0) return '';
     let result = '';
     for (let elem of data) {
@@ -202,8 +202,8 @@ class Template {
     this.noRacesNotification.classList.remove('hide');
   }
 
+  // eslint-disable-next-line consistent-return
   render(data, searchDate) {
-    console.log(data);
     this.setDefaultView();
     if (data.segments.length === 0) {
       this.showNoTransport();
@@ -212,6 +212,7 @@ class Template {
     let departedCount = 0;
     let availableRacesCount = 0;
     for (let elem of data.segments) {
+      // eslint-disable-next-line max-len
       const tickets = elem.tickets_info && elem.tickets_info.places ? elem.tickets_info.places : null;
       const departure = new Date(elem.departure);
       // eslint-disable-next-line no-continue
@@ -226,14 +227,12 @@ class Template {
         duration: this.getDuration(elem.duration),
         titleFrom: elem.from.popular_title ? elem.from.popular_title : elem.from.title,
         titleTo: elem.to.popular_title ? elem.to.popular_title : elem.to.title,
-        tickets: this.renderTickets(tickets)
+        tickets: Template.renderTickets(tickets)
       };
       let offset = departure - new Date();
       if (offset <= 0) {
         departedCount += 1;
         this.drawTemplateElem(options, this.departedItemsList);
-        // eslint-disable-next-line no-continue
-        continue;
       } else {
         availableRacesCount += 1;
         this.drawTemplateElem(options, this.itemsList);

@@ -81,9 +81,11 @@ class DateInput {
   }
 
   setData(options) {
-    let { value = 'сегодня', dataValue = DateInput.getDateFromOption('today') } = options;
-    this.picker.setDate(new Date(Date.parse(dataValue)), true);
-    this.input.value = value;
+    let { value = 'сегодня', dataValue = DateInput.getDateFromOption('today'), notSet = false } = options;
+    if (!notSet) {
+      this.picker.setDate(new Date(Date.parse(dataValue)), true);
+      this.input.value = value;
+    }
   }
 }
 

@@ -30,7 +30,7 @@ class App {
     this.modalWindow = new ModalWindow();
     this.dictionary = new Dictionary(this.lang);
     this.header = new Header(this.lang);
-    this.langSelect = new LangSelect(document.querySelector('.header__select'), this.lang, this.changeLang.bind(this));
+    this.langSelect = new LangSelect(document.querySelector('.header__select'), this.lang, App.changeLang.bind(this));
 
     this.searchButton.addEventListener('click', this.searchButtonClickListener.bind(this));
 
@@ -39,12 +39,14 @@ class App {
     document.addEventListener('DOMContentLoaded', this.domContentLoadedEventListener.bind(this));
   }
 
-  changeLang(lang) {
+  static changeLang(lang) {
     localStorage.setItem('lang', lang);
-    this.location.changeLang();
+    Location.changeLang();
+    // eslint-disable-next-line no-restricted-globals
     location.reload();
   }
 
+  // eslint-disable-next-line consistent-return
   static binarySearch(data, target, start, end) {
     if (end < 1) return data[0];
     const middle = Math.floor((start + (end - start) / 2));
@@ -54,7 +56,11 @@ class App {
     const startCode = Number(data[start].code.slice(1));
     const targetCode = Number(target.slice(1));
     const endCode = Number(data[end].code.slice(1));
-    if (end - 1 === start) return Math.abs(startCode - targetCode) > Math.abs(endCode - targetCode) ? data[end] : data[start];
+    if (end - 1 === start) {
+      return Math.abs(startCode - targetCode)
+    > Math.abs(endCode - targetCode) ? data[end]
+        : data[start];
+    }
 
     const middleCode = Number(data[middle].code.slice(1));
     if (targetCode > middleCode) return this.binarySearch(data, target, middle, end);
@@ -73,6 +79,7 @@ class App {
   domContentLoadedEventListener() {
     this.modalWindow.checkOpen();
 
+    // eslint-disable-next-line no-restricted-globals
     let urlParams = Routing.parseUrl(location.href);
 
     const paramName = this.lang === 'RU' ? 'title' : 'titleUA';
@@ -95,6 +102,7 @@ class App {
 
   historyPopstateListener(e) {
     const state = e.state;
+    // eslint-disable-next-line no-restricted-globals
     let urlParams = Routing.parseUrl(location.href);
     if (urlParams.from) {
       this.renderSearch(urlParams, state.from, state.to, state.date);

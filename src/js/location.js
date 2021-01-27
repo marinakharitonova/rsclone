@@ -41,7 +41,7 @@ class Location {
         result: []
       };
 
-      this.changeInputsCb(dataInputFrom, dataInputTo);
+      this.changeInputsCb(dataInputFrom, dataInputTo, { notSet: true });
     }
   }
 
@@ -69,6 +69,7 @@ class Location {
     this.renderLastCities(lastCities);
   }
 
+  // eslint-disable-next-line consistent-return
   renderLastCities(data) {
     if (data.length === 0) return false;
     this.sitiesLast.innerHTML = '';
@@ -119,7 +120,7 @@ class Location {
     }
   }
 
-  changeLang() {
+  static changeLang() {
     localStorage.removeItem('lastCities');
   }
 
@@ -130,7 +131,6 @@ class Location {
       var location = ymaps.geolocation.get();
       location.then(
         (result) => {
-          console.log(result);
           let userAddress = result.geoObjects.get(0).properties.get('description');
           let userCoordinates = result.geoObjects.get(0).geometry.getCoordinates();
           if (userAddress.length > 1) {
@@ -140,13 +140,12 @@ class Location {
             sessionStorage.setItem('locationName', name);
             this.getNearestStations(userCoordinates);
           }
-        },
-        (err) => {
-          console.log(err);
+        }
+      )
+        .catch(() => {
           this.homeLocation.classList.add('hide');
           this.homePlaces.classList.add('hide');
-        }
-      );
+        });
     });
   }
 
@@ -233,24 +232,25 @@ class Location {
     return [forSuburban, forPlane, forTrain, forBus];
   }
 
+  // eslint-disable-next-line consistent-return
   renderPlaces(places) {
     this.homePlaces.innerHTML = '';
     if (places.length === 0) return false;
     for (let elem of places) {
-      if (elem.stations.length === 0) continue;
-      const mode = elem.stations.length <= this.stationsMaxCount ? 'block' : 'list';
-      const stations = Location.renderStations(elem.stations, elem.type, mode);
-      let template = '';
-      if (elem.stations.length <= 13) {
-        template = `<div class="home__station station">
+      if (elem.stations.length > 0) {
+        const mode = elem.stations.length <= this.stationsMaxCount ? 'block' : 'list';
+        const stations = Location.renderStations(elem.stations, elem.type, mode);
+        let template = '';
+        if (elem.stations.length <= 13) {
+          template = `<div class="home__station station">
                         <div class="station__caption">
                             <img src="${elem.img}" alt="" class="station__img">
                             <h2 class="station__name">${elem.name}</h2>
                         </div>
                         <ul class="station__list">${stations}</ul>
                       </div>`;
-      } else {
-        template = `<div class="home__station home__station_list station">
+        } else {
+          template = `<div class="home__station home__station_list station">
                       <div class="station__caption  station__caption_link">
                           <img src="${elem.img}" alt="" class="station__img">
                           <h2 class="station__name">${elem.name}</h2>
@@ -260,9 +260,10 @@ class Location {
                          ${stations}
                       </ul>
                     </div>`;
-      }
+        }
 
-      this.homePlaces.insertAdjacentHTML('beforeend', template);
+        this.homePlaces.insertAdjacentHTML('beforeend', template);
+      }
     }
   }
 }

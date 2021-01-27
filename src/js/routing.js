@@ -1,14 +1,14 @@
 class Routing {
   static setUrl(urlAddition, params, state) {
+    // eslint-disable-next-line no-restricted-globals
     let url = new URL(`${location.href}`);
-    console.log(url);
 
+    // eslint-disable-next-line guard-for-in
     for (let key in params) {
       url.searchParams.set(key, params[key]);
     }
 
-    console.log(url);
-
+    // eslint-disable-next-line no-restricted-globals
     history.pushState(state, null, url.href);
   }
 
