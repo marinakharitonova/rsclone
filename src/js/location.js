@@ -1,8 +1,9 @@
 import RequestHelper from './requestHelper';
 
 class Location {
-  constructor(cb) {
+  constructor(cb, lang) {
     this.changeInputsCb = cb;
+    this.lang = lang;
     this.init();
   }
 
@@ -63,7 +64,6 @@ class Location {
         codeTo,
         nameTo
       }].concat(lastCities);
-      console.log(lastCities);
     }
     localStorage.setItem('lastCities', JSON.stringify(lastCities));
     this.renderLastCities(lastCities);
@@ -119,6 +119,13 @@ class Location {
     }
   }
 
+  changeLang(lang) {
+    this.lang = lang;
+    this.getUserGeolocation();
+    localStorage.removeItem('lastCities');
+    this.sitiesLast.innerHTML = '';
+  }
+
   getUserGeolocation() {
     // eslint-disable-next-line no-undef
     ymaps.ready(() => {
@@ -126,16 +133,21 @@ class Location {
       var location = ymaps.geolocation.get();
       location.then(
         (result) => {
+          console.log(result);
           let userAddress = result.geoObjects.get(0).properties.get('description');
           let userCoordinates = result.geoObjects.get(0).geometry.getCoordinates();
-          let splitAddress = userAddress.split(',');
-          const name = splitAddress[splitAddress.length - 1];
-          this.setName(name);
-          sessionStorage.setItem('locationName', name);
-          this.getNearestStations(userCoordinates);
+          if (userAddress.length > 1) {
+            let splitAddress = userAddress.split(',');
+            const name = splitAddress[splitAddress.length - 1];
+            this.setName(name);
+            sessionStorage.setItem('locationName', name);
+            this.getNearestStations(userCoordinates);
+          }
         },
         (err) => {
-          console.log('Ошибка: ' + err);
+          console.log(err);
+          this.homeLocation.classList.add('hide');
+          this.homePlaces.classList.add('hide');
         }
       );
     });
@@ -146,10 +158,11 @@ class Location {
     const lat = coords[0];
     const long = coords[1];
     const key = RequestHelper.getKey();
-    const urlTrain = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=train_station`;
-    const urlPlane = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=airport`;
-    const urlSuburban = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=station`;
-    const urlBus = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=ru_RU&station_types=bus_station`;
+    const langParam = this.lang === 'RU' ? 'ru_RU' : 'uk_UA';
+    const urlTrain = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=${langParam}&station_types=train_station`;
+    const urlPlane = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=${langParam}&station_types=airport`;
+    const urlSuburban = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=${langParam}&station_types=station`;
+    const urlBus = `https://api.rasp.yandex.net/v3.0/nearest_stations/?apikey=${key}&format=json&lat=${lat}&lng=${long}&distance=${dist}&lang=${langParam}&station_types=bus_station`;
     RequestHelper.sendManyRequests([urlBus, urlPlane, urlSuburban, urlTrain], (data) => {
       sessionStorage.setItem('nearestStations', JSON.stringify(data));
       this.renderLocationBlock(data);
@@ -161,7 +174,7 @@ class Location {
   }
 
   renderLocationBlock(data) {
-    const localData = Location.makeDataForRender(data);
+    const localData = this.makeDataForRender(data);
     this.renderPlaces(localData);
     this.homeLocation.classList.remove('hide');
   }
@@ -189,32 +202,32 @@ class Location {
     return res;
   }
 
-  static makeDataForRender(data) {
+  makeDataForRender(data) {
     const trainStation = data[3].stations;
     const busStation = data[0].stations;
     const station = data[2].stations;
     const airport = data[1].stations;
 
     const forTrain = {
-      name: 'Расписание поездов',
+      name: this.lang === 'RU' ? 'Расписание поездов' : 'Розклад поїздів',
       stations: trainStation,
       img: 'src/assets/img/train.svg',
       type: 'train'
     };
     const forBus = {
-      name: 'Расписание автобусов',
+      name: this.lang === 'RU' ? 'Расписание автобусов' : 'Розклад автобусів',
       stations: busStation,
       img: 'src/assets/img/bus.png',
       type: 'bus'
     };
     const forPlane = {
-      name: 'Табло аэропортов',
+      name: this.lang === 'RU' ? 'Табло аэропортов' : 'Табло аеропортів',
       stations: airport,
       img: 'src/assets/img/plane.png',
       type: 'plane'
     };
     const forSuburban = {
-      name: 'Расписание электричек',
+      name: this.lang === 'RU' ? 'Расписание электричек' : 'Розклад електричок',
       stations: station,
       img: 'src/assets/img/el-train.svg',
       type: 'suburban'

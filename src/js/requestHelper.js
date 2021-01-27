@@ -4,7 +4,6 @@ class RequestHelper {
   }
 
   static sendRequest(url, cb, arg = '') {
-    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
     fetch(url)
       .then(response => response.json())
       .then(contents => cb(contents, arg))
@@ -12,7 +11,6 @@ class RequestHelper {
   }
 
   static sendManyRequests(urls, cb) {
-    const proxyurl = 'https://cors-anywhere.herokuapp.com/';
     let requests = urls.map(url => fetch(url));
 
     Promise.all(requests)

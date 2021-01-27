@@ -1,8 +1,9 @@
 import datepicker from 'js-datepicker';
 
 class DateInput {
-  constructor(input) {
+  constructor(input, lang) {
     this.input = input;
+    this.lang = lang;
     this.init();
   }
 
@@ -13,10 +14,15 @@ class DateInput {
 
     this.input.setAttribute('data-value', DateInput.getDateFromOption('today'));
 
+    this.ruDays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.uaDays = ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.ruMonths = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    this.uaMonths = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'];
+
     this.picker = datepicker('#datepicker', {
       startDay: 1,
-      customDays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-      customMonths: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+      customDays: this.lang === 'RU' ? this.ruDays : this.uaDays,
+      customMonths: this.lang === 'RU' ? this.ruMonths : this.uaMonths,
       minDate: new Date(),
       formatter: (input, date) => {
         const value = date.toLocaleDateString();

@@ -1,8 +1,9 @@
 import DateInput from './dateInput';
 
 class Template {
-  constructor(container) {
+  constructor(container, lang) {
     this.container = container;
+    this.lang = lang;
 
     this.init();
   }
@@ -25,9 +26,15 @@ class Template {
       if (btn) {
         this.departedItemsList.classList.toggle('hide');
         let btnText = this.departedBlock.querySelector('.template__departed-btn-text');
-        btnText.textContent = this.departedItemsList.classList.contains('hide') ? 'Показать ушедшие' : 'Скрыть ушедшие';
+        const showGone = this.lang === 'RU' ? 'Показать ушедшие' : 'Показати пішли';
+        const hideGone = this.lang === 'RU' ? 'Скрыть ушедшие' : 'Приховати пішли';
+        btnText.textContent = this.departedItemsList.classList.contains('hide') ? showGone : hideGone;
       }
     });
+  }
+
+  changeLang(lang) {
+    this.lang = lang;
   }
 
   static playSound(audio) {
@@ -46,42 +53,44 @@ class Template {
     this.container.classList.add('hide');
   }
 
-  static getMonthName(number) {
+  getMonthName(number) {
     switch (number) {
       case 0:
-        return 'янв';
+        return this.lang === 'RU' ? 'янв' : 'січ';
       case 1:
-        return 'фев';
+        return this.lang === 'RU' ? 'фев' : 'лют';
       case 2:
-        return 'март';
+        return this.lang === 'RU' ? 'март' : 'берез';
       case 3:
-        return 'апр';
+        return this.lang === 'RU' ? 'апр' : 'квіт';
       case 4:
-        return 'май';
+        return this.lang === 'RU' ? 'май' : 'трав';
       case 5:
-        return 'июн';
+        return this.lang === 'RU' ? 'июн' : 'черв';
       case 6:
-        return 'июл';
+        return this.lang === 'RU' ? 'июл' : 'лип';
       case 7:
-        return 'авг';
+        return this.lang === 'RU' ? 'авг' : 'серп';
       case 8:
-        return 'сент';
+        return this.lang === 'RU' ? 'сент' : 'верес';
       case 9:
-        return 'окт';
+        return this.lang === 'RU' ? 'окт' : 'жовт';
       case 10:
-        return 'нов';
+        return this.lang === 'RU' ? 'нов' : 'лист';
       case 11:
-        return 'дек';
+        return this.lang === 'RU' ? 'дек' : 'груд';
       default:
         return false;
     }
   }
 
-  static getDuration(number) {
+  getDuration(number) {
     const count = number / 60;
     const hours = Math.trunc(count / 60);
     const min = count % 60;
-    return `${hours}ч ${DateInput.formatDateNumber(min)}мин`;
+    const minText = this.lang === 'RU' ? 'мин' : 'хв';
+    const hoursText = this.lang === 'RU' ? 'ч' : 'год';
+    return `${hours}${hoursText} ${DateInput.formatDateNumber(min)}${minText}`;
   }
 
   static getImgFromTransportType(type) {
@@ -133,7 +142,7 @@ class Template {
                     </div>
                     <div class="template__block template__block_time">
                         <div class="template__time">
-                            <p class="template__time-date">${departure.getDate()} ${Template.getMonthName(departure.getMonth())}</p>
+                            <p class="template__time-date">${departure.getDate()} ${this.getMonthName(departure.getMonth())}</p>
                             <p class="template__time-from">${DateInput.formatDateNumber(departure.getHours())}:${DateInput.formatDateNumber(departure.getMinutes())}</p>
                             <p class="template__time-station">${titleFrom}</p>
                         </div>
@@ -141,7 +150,7 @@ class Template {
                             <p class="template__time-duration">${duration}</p>
                         </div>
                         <div class="template__time template__time_right">
-                            <p class="template__time-date">${arrival.getDate()} ${Template.getMonthName(arrival.getMonth())}</p>
+                            <p class="template__time-date">${arrival.getDate()} ${this.getMonthName(arrival.getMonth())}</p>
                             <p class="template__time-to">${DateInput.formatDateNumber(arrival.getHours())}:${DateInput.formatDateNumber(arrival.getMinutes())}</p>
                             <p class="template__time-station">${titleTo}</p>
                         </div>
@@ -218,7 +227,7 @@ class Template {
         vehicle: elem.thread && elem.thread.vehicle ? elem.thread.vehicle : '',
         departure: departure,
         arrival: new Date(elem.arrival),
-        duration: Template.getDuration(elem.duration),
+        duration: this.getDuration(elem.duration),
         titleFrom: elem.from.popular_title ? elem.from.popular_title : elem.from.title,
         titleTo: elem.to.popular_title ? elem.to.popular_title : elem.to.title,
         tickets: this.renderTickets(tickets)

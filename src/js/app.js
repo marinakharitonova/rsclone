@@ -6,8 +6,11 @@ import HomeContainer from './homeContainer';
 import Routing from './routing';
 import Location from './location';
 import ModalWindow from './modalWindow';
+import Header from './header';
+import LangSelect from './langSelect';
 
 import DATA from './data';
+import Dictionary from './dictionary';
 
 class App {
   constructor() {
@@ -16,20 +19,34 @@ class App {
 
   init() {
     this.mode = 'all';
+    this.lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'RU';
     this.searchButton = document.querySelector('.cities__button');
 
     this.selector = new Selector(this.changeMode.bind(this));
-    this.inputContainer = new InputContainer(document.querySelector('.cities__fields'));
-    this.template = new Template(document.querySelector('.main__template'));
+    this.inputContainer = new InputContainer(document.querySelector('.cities__fields'), this.lang);
+    this.template = new Template(document.querySelector('.main__template'), this.lang);
     this.homeContainer = new HomeContainer(document.querySelector('.main__home'));
-    this.location = new Location(this.inputContainer.setData.bind(this.inputContainer));
+    this.location = new Location(this.inputContainer.setData.bind(this.inputContainer), this.lang);
     this.modalWindow = new ModalWindow();
+    this.dictionary = new Dictionary(this.lang);
+    this.header = new Header(this.lang);
+    this.langSelect = new LangSelect(document.querySelector('.header__select'), this.lang, this.changeLang.bind(this));
 
     this.searchButton.addEventListener('click', this.searchButtonClickListener.bind(this));
 
     window.onpopstate = this.historyPopstateListener.bind(this);
 
     document.addEventListener('DOMContentLoaded', this.domContentLoadedEventListener.bind(this));
+  }
+
+  changeLang(lang) {
+    this.lang = lang;
+    localStorage.setItem('lang', lang);
+    this.header.setLang(lang);
+    this.dictionary.changeLang(lang);
+    this.inputContainer.changeLang(lang);
+    this.location.changeLang(lang);
+    this.template.changeLang(lang);
   }
 
   static binarySearch(data, target, start, end) {
@@ -114,7 +131,8 @@ class App {
     } = params;
     const dateParam = date ? `&date=${date}` : '';
     const transportParm = this.mode !== 'all' ? `&transport_types=${this.mode}` : '';
-    const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${RequestHelper.getKey()}&format=json&from=${from}&to=${to}&lang=ru_RU&page=1${dateParam}${transportParm}`;
+    const langParam = this.lang === 'RU' ? 'ru_RU' : 'uk_UA';
+    const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${RequestHelper.getKey()}&format=json&from=${from}&to=${to}&lang=${langParam}&page=1${dateParam}${transportParm}`;
 
     if (from && to) {
       this.homeContainer.hide();

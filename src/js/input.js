@@ -1,8 +1,10 @@
 import DATA from './data';
+import DICTIONARY from './dictionaryData';
 
 class Input {
-  constructor(input) {
+  constructor(input, lang) {
     this.input = input;
+    this.lang = lang;
 
     this.init();
   }
@@ -11,9 +13,19 @@ class Input {
     this.dropDown = this.input.nextElementSibling;
     this.resultMaxLength = 10;
     this.result = [];
+    this.setPlaceholder();
     this.input.addEventListener('input', this.inputEventListener.bind(this));
     this.input.addEventListener('focus', this.focusEventListener.bind(this));
     this.dropDown.addEventListener('click', this.dropdownEventListener.bind(this));
+    this.setPlaceholder(this.lang);
+  }
+
+  setPlaceholder(lang) {
+    const elem = DICTIONARY.find(elem => elem.key === this.input.dataset.placeholder);
+    if (elem) {
+      const placeholder = lang === 'RU' ? elem.langRu : elem.langUa;
+      this.input.setAttribute('placeholder', placeholder);
+    }
   }
 
   dropdownEventListener(e) {
@@ -33,9 +45,10 @@ class Input {
     let value = this.input.value.toLowerCase().trim();
     for (let elem of DATA) {
       // eslint-disable-next-line max-len
-      const canAddResultItem = value && elem.title.toLowerCase().startsWith(value) && result.length < this.resultMaxLength;
+      const setting = this.lang === 'RU' ? 'title' : 'titleUA';
+      const canAddResultItem = value && elem[setting].toLowerCase().startsWith(value) && result.length < this.resultMaxLength;
       if (canAddResultItem) {
-        result.push({ title: elem.title, code: elem.code });
+        result.push({ title: elem[setting], code: elem.code });
       }
     }
     this.result = result;

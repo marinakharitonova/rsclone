@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/png" sizes="32x32"
           href="https://yastat.net/s3/rasp/s/morda-front/_/favicons/favicon-32x32.png">
-    <title>Расписание электричек, поездов, автобусов и самолётов — Яндекс.Расписания</title>
+    <title data-dictionary="main"></title>
     <script src="https://api-maps.yandex.ru/2.1?apikey=4334eecc-1496-4b85-9762-2ba51915bcaf&lang=ru_RU"
             type="text/javascript">
     </script>
@@ -18,10 +18,10 @@
         <div class="header__container">
             <div class="header__left">
                 <div class="header__logo">
-                    <a href="https://yandex.ru/" target="_blank" class="header__logo-text"><img
+                    <a href="" target="_blank" class="header__logo-text"><img
                             src="src/assets/img/yandex-logo.png" alt="Яндекс"></a>
                     <a href="https://rolling-scopes-school.github.io/marinakharitonova-JS2020Q3/rsclone/"
-                       class="logo-link"><img src="src/assets/img/rasp-logo.png" alt="Расписания"></a>
+                       class="logo-link"><img src="" alt="Расписания" class="rasp-logo"></a>
                 </div>
                 <div class="header__text">RS CLone</div>
             </div>
@@ -30,8 +30,12 @@
                 <div class="header__tickets">
                     <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-img"><img
                             src="src/assets/img/tickets.png" alt="Билеты"></a>
-                    <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-text">Билеты</a>
+                    <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-text" data-dictionary="tickets"></a>
                 </div>
+                <select class="header__select">
+                    <option value="RU">RU</option>
+                    <option value="UA">UA</option>
+                </select>
             </div>
         </div>
     </div>
@@ -41,33 +45,38 @@
     <div class="modal-window">
         <div class="modal-window__inner">
             <img src="src/assets/img/close.svg" alt="Close" class="modal-window__close">
-            <button class="modal-window__all">Больше не показывть это сообщение</button>
+            <button class="modal-window__all" data-dictionary="no-show"></button>
         </div>
     </div>
     <div class="container">
-        <h1 class="main__title">
-            Расписание пригородного и междугородного транспорта
+        <h1 class="main__title" data-dictionary="title">
         </h1>
         <div class="selector main__selector">
-            <button class="selector__item active" data-value="all">Любой</button>
-            <button class="selector__item" data-value="plane">Самолет</button>
-            <button class="selector__item" data-value="train">Поезд</button>
-            <button class="selector__item" data-value="suburban">Электричка</button>
-            <button class="selector__item" data-value="bus">Автобус</button>
+            <button class="selector__item active" data-value="all" data-dictionary="all"></button>
+            <button class="selector__item" data-value="plane" data-dictionary="plane"></button>
+            <button class="selector__item" data-value="train" data-dictionary="train"></button>
+            <button class="selector__item" data-value="suburban" data-dictionary="suburban"></button>
+            <button class="selector__item" data-value="bus" data-dictionary="bus"></button>
         </div>
         <div class="cities main__cities">
             <div class="cities__fields">
                 <div class="cities__places">
                     <div class="cities__names">
                         <div class="cities__input-wrapper cities__input-wrapper_from">
-                            <input type="text" class="cities__input cities__input_from" placeholder="Откуда">
+                            <input type="text"
+                                   class="cities__input cities__input_from"
+                                   data-placeholder="from"
+                                   placeholder="">
                             <ul class="list list-from"></ul>
                         </div>
                         <button class="cities__change">
                             <img src="src/assets/img/arrows.svg" alt="" class="cities__change-arrow">
                         </button>
                         <div class="cities__input-wrapper cities__input-wrapper_to">
-                            <input type="text" class="cities__input cities__input_to" placeholder="Куда">
+                            <input type="text"
+                                   class="cities__input cities__input_to"
+                                   data-placeholder="to"
+                                   placeholder="">
                             <ul class="list"></ul>
                         </div>
                     </div>
@@ -78,14 +87,14 @@
                         <input type="text" class="cities__input cities__input_date" value="cегодня" readonly id="datepicker">
                     </div>
                     <div class="cities__date-text">
-                        <button class="link link-date" data-value="today">сегодня</button>
-                        <button class="link link-date" data-value="tomorrow">завтра</button>
+                        <button class="link link-date" data-value="today" data-dictionary="today"></button>
+                        <button class="link link-date" data-value="tomorrow" data-dictionary="tomorrow"></button>
                     </div>
                 </div>
 
-                <div class="cities__notification">Задайте параметры поиска</div>
+                <div class="cities__notification" data-dictionary="no-params"></div>
 
-                <button class="cities__button">Найти</button>
+                <button class="cities__button" data-dictionary="search"></button>
             </div>
         </div>
         <div class="home main__home">
@@ -94,14 +103,14 @@
                     <div class="link_home"></div>
                 </div>
 
-                <p class="text">Ближайшие станции</p>
+                <p class="text" data-dictionary="nearest"></p>
             </div>
             <div class="home__places"></div>
             <div class="home__advert advert">
                 <div class="advert__item">
                     <a href="https://mobile.yandex.ru/apps/android/rasp" target="_blank" class="advert__link">
                         <img src="src/assets/img/train-adv.svg" alt="Электички для смартфона" class="advert__img">
-                        <h3 class="advert__name">Электички для смартфона</h3>
+                        <h3 class="advert__name" data-dictionary="adv1"></h3>
                         <div class="advert__buttons">
                             <button class="advert__button">
                                 <img src="src/assets/img/google-icon.png" alt="Google play" class="advert__img_small">
@@ -115,49 +124,44 @@
                 <div class="advert__item">
                     <a href="https://travel.yandex.ru/buses" target="_blank" class="advert__link">
                         <img src="src/assets/img/bus-adv.svg" alt="Яндекс.Автобусы" class="advert__img">
-                        <h3 class="advert__name">Яндекс.Автобусы</h3>
-                        <p class="advert__text">Билеты на междугородние автобусы</p>
+                        <h3 class="advert__name" data-dictionary="adv2"></h3>
+                        <p class="advert__text" data-dictionary="adv2-text"></p>
                     </a>
                 </div>
                 <div class="advert__item">
                     <a href="https://travel.yandex.ru/avia" target="_blank" class="advert__link">
                         <img src="src/assets/img/plane-adv.svg" alt="Яндекс.Авиабилеты" class="advert__img">
-                        <h3 class="advert__name">Яндекс.Авиабилеты</h3>
-                        <p class="advert__text">Поиск дешевых авиабилетов</p>
+                        <h3 class="advert__name" data-dictionary="adv3"></h3>
+                        <p class="advert__text" data-dictionary="adv3-text"></p>
                     </a>
                 </div>
             </div>
             <div class="home__info info">
-                <h2 class="info__caption">
-                    Актуальное расписание на&nbsp;Яндексе
+                <h2 class="info__caption" data-dictionary="info-caption">
                 </h2>
-                <p class="info__text">
-                    Яндекс.Расписания&nbsp;&mdash; это сервис, где можно получить информацию о&nbsp;движении
-                    пригородного и&nbsp;междугороднего транспорта и&nbsp;узнать актуальное расписание электричек,
-                    поездов, самолетов, автобусов, теплоходов и&nbsp;паромов. А&nbsp;также выяснить, как добраться из&nbsp;одного
-                    пункта в&nbsp;другой, где делать пересадку и&nbsp;сколько стоит билет.
+                <p class="info__text" data-dictionary="info-text">
                 </p>
             </div>
         </div>
         <div class="template main__template hide">
             <div class="template__preloader">
                 <img src="src/assets/img/animation-bus.gif" alt="" class="template__preloader-img">
-                <p class="text">Идет поиск подходящих вариантов</p>
+                <p class="text" data-dictionary="search-text"></p>
             </div>
 
             <div class="template__departed hide">
                 <ul class="template__list-departed hide"></ul>
                 <button class="template__departed-btn">
-                    <span class="template__departed-btn-text">Показать ушедшие</span> <span class="template__departed-col"></span>
+                    <span class="template__departed-btn-text" data-dictionary="show-gone"></span> <span class="template__departed-col"></span>
                 </button>
             </div>
             <ul class="template__list hide"></ul>
             <div class="template__no-transport hide">
-                <h2>Рейсов не найдено :(</h2>
-                <p class="text">Посмотрите расписание на другие дни, варианты проезда всеми видами транспорта или выберите другой пункт назначения.</p>
+                <h2 data-dictionary="no-races"></h2>
+                <p class="text" data-dictionary="see-more"></p>
             </div>
             <div class="template__no-races hide">
-                <p class="text">Нет доступных рейсов на сегодня</p>
+                <p class="text" data-dictionary="no-races-today"></p>
             </div>
         </div>
         <audio src="src/assets/sound/result.mp3" id="success-result"></audio>

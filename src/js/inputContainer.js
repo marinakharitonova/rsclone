@@ -2,21 +2,27 @@ import Input from './input';
 import DateInput from './dateInput';
 
 class InputContainer {
-  constructor(container) {
+  constructor(container, lang) {
     this.container = container;
+    this.lang = lang;
 
     this.init();
   }
 
   init() {
-    this.fromInput = new Input(this.container.querySelector('.cities__input_from'));
-    this.toInput = new Input(this.container.querySelector('.cities__input_to'));
-    this.dateInput = new DateInput(this.container.querySelector('.cities__input_date'));
+    this.fromInput = new Input(this.container.querySelector('.cities__input_from'), this.lang);
+    this.toInput = new Input(this.container.querySelector('.cities__input_to'), this.lang);
+    this.dateInput = new DateInput(this.container.querySelector('.cities__input_date'), this.lang);
     this.changeDirectionBtn = this.container.querySelector('.cities__change');
     this.notification = this.container.querySelector('.cities__notification');
 
     document.addEventListener('click', this.documentClickListener.bind(this));
     this.changeDirectionBtn.addEventListener('click', this.changeDirectionBtnClickListener.bind(this));
+  }
+
+  changeLang(lang) {
+    this.fromInput.setPlaceholder(lang);
+    this.toInput.setPlaceholder(lang);
   }
 
   documentClickListener(e) {
