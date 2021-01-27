@@ -119,11 +119,8 @@ class Location {
     }
   }
 
-  changeLang(lang) {
-    this.lang = lang;
-    this.getUserGeolocation();
+  changeLang() {
     localStorage.removeItem('lastCities');
-    this.sitiesLast.innerHTML = '';
   }
 
   getUserGeolocation() {

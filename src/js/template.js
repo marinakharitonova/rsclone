@@ -33,10 +33,6 @@ class Template {
     });
   }
 
-  changeLang(lang) {
-    this.lang = lang;
-  }
-
   static playSound(audio) {
     if (!audio) return;
     // eslint-disable-next-line no-param-reassign

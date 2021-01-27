@@ -21,6 +21,7 @@
 
   &__tickets{
     @include flex(row nowrap, flex-start, flex-start);
+    margin-bottom: 10px;
 
     &-img{
       margin-right: 4px;
@@ -35,5 +36,15 @@
         opacity: 0.7;
       }
     }
+  }
+
+  &__desc{
+    text-align: center;
+  }
+
+  &__select{
+    outline: none;
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 5px;
   }
 }

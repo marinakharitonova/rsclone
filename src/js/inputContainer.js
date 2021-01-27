@@ -20,11 +20,6 @@ class InputContainer {
     this.changeDirectionBtn.addEventListener('click', this.changeDirectionBtnClickListener.bind(this));
   }
 
-  changeLang(lang) {
-    this.fromInput.setPlaceholder(lang);
-    this.toInput.setPlaceholder(lang);
-  }
-
   documentClickListener(e) {
     let elem = e.target;
 

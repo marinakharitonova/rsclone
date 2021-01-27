@@ -40,13 +40,9 @@ class App {
   }
 
   changeLang(lang) {
-    this.lang = lang;
     localStorage.setItem('lang', lang);
-    this.header.setLang(lang);
-    this.dictionary.changeLang(lang);
-    this.inputContainer.changeLang(lang);
-    this.location.changeLang(lang);
-    this.template.changeLang(lang);
+    this.location.changeLang();
+    location.reload();
   }
 
   static binarySearch(data, target, start, end) {
@@ -79,10 +75,12 @@ class App {
 
     let urlParams = Routing.parseUrl(location.href);
 
+    const paramName = this.lang === 'RU' ? 'title' : 'titleUA';
+
     if (urlParams.from) {
-      const pointFrom = App.binarySearch(DATA, urlParams.from, 0, DATA.length - 1).title;
+      const pointFrom = App.binarySearch(DATA, urlParams.from, 0, DATA.length - 1)[paramName];
       const titleFrom = pointFrom.split(',')[0];
-      const pointTo = App.binarySearch(DATA, urlParams.to, 0, DATA.length - 1).title;
+      const pointTo = App.binarySearch(DATA, urlParams.to, 0, DATA.length - 1)[paramName];
       const titleTo = pointTo.split(',')[0];
       const date = new Date(Date.parse(urlParams.date)).toLocaleDateString();
       this.renderSearch(urlParams, titleFrom, titleTo, date);
