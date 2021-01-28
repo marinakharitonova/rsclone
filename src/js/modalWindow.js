@@ -18,12 +18,12 @@ class ModalWindow {
     }
 
     if (elem.closest('.modal-window__all')) {
-      this.disableModalOpen();
+      ModalWindow.disableModalOpen();
       this.close();
     }
   }
 
-  disableModalOpen() {
+  static disableModalOpen() {
     localStorage.setItem('notShowModal', 'true');
   }
 

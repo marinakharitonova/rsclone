@@ -10,7 +10,7 @@ class LangSelect {
   init() {
     this.setValue(this.lang);
 
-    this.select.addEventListener('change', (e) => {
+    this.select.addEventListener('change', () => {
       this.cb(this.select.value);
     });
   }

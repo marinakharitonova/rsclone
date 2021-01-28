@@ -69,7 +69,6 @@ class Location {
     this.renderLastCities(lastCities);
   }
 
-  // eslint-disable-next-line consistent-return
   renderLastCities(data) {
     if (data.length === 0) return false;
     this.sitiesLast.innerHTML = '';
@@ -100,13 +99,13 @@ class Location {
                       </li>`;
       list += template;
     }
-    let secodTemplate = `<div class="link-wrapper">
+    let secondTemplate = `<div class="link-wrapper">
                             <button class="link">● ● ●</button>
                             <ul class="list list_last">
                                 ${list}
                             </ul>
                         </div>`;
-    if (list.length > 0) this.sitiesLast.insertAdjacentHTML('beforeend', secodTemplate);
+    if (list.length > 0) this.sitiesLast.insertAdjacentHTML('beforeend', secondTemplate);
   }
 
   findDataInSessionStorage() {
@@ -125,9 +124,7 @@ class Location {
   }
 
   getUserGeolocation() {
-    // eslint-disable-next-line no-undef
     ymaps.ready(() => {
-      // eslint-disable-next-line no-undef
       var location = ymaps.geolocation.get();
       location.then(
         (result) => {
@@ -232,7 +229,6 @@ class Location {
     return [forSuburban, forPlane, forTrain, forBus];
   }
 
-  // eslint-disable-next-line consistent-return
   renderPlaces(places) {
     this.homePlaces.innerHTML = '';
     if (places.length === 0) return false;

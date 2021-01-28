@@ -61,6 +61,25 @@
     }
   }
 
+  .text{
+    text-align: center;
+    font-size: 18px;
+    line-height: 24px;
+    margin-top: 20px;
+    @media #{$xs}{
+      margin-top: 30px;
+    }
+
+    span{
+      display: block;
+    }
+
+    .link{
+      font-size: inherit;
+      line-height: inherit;
+    }
+  }
+
 }
 
 .modal-overlay{

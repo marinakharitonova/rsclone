@@ -25,9 +25,8 @@ class DateInput {
       customMonths: this.lang === 'RU' ? this.ruMonths : this.uaMonths,
       minDate: new Date(),
       formatter: (input, date) => {
-        const value = date.toLocaleDateString();
         // eslint-disable-next-line no-param-reassign
-        input.value = value;
+        input.value = date.toLocaleDateString();
       },
       onSelect: instance => {
         this.input.setAttribute('data-value', DateInput.formatDate(instance.dateSelected));

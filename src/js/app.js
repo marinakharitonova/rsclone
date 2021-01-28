@@ -42,11 +42,9 @@ class App {
   static changeLang(lang) {
     localStorage.setItem('lang', lang);
     Location.changeLang();
-    // eslint-disable-next-line no-restricted-globals
     location.reload();
   }
 
-  // eslint-disable-next-line consistent-return
   static binarySearch(data, target, start, end) {
     if (end < 1) return data[0];
     const middle = Math.floor((start + (end - start) / 2));
@@ -79,7 +77,6 @@ class App {
   domContentLoadedEventListener() {
     this.modalWindow.checkOpen();
 
-    // eslint-disable-next-line no-restricted-globals
     let urlParams = Routing.parseUrl(location.href);
 
     const paramName = this.lang === 'RU' ? 'title' : 'titleUA';
@@ -102,7 +99,6 @@ class App {
 
   historyPopstateListener(e) {
     const state = e.state;
-    // eslint-disable-next-line no-restricted-globals
     let urlParams = Routing.parseUrl(location.href);
     if (urlParams.from) {
       this.renderSearch(urlParams, state.from, state.to, state.date);

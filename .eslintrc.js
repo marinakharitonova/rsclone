@@ -10,6 +10,9 @@ module.exports = {
   },
   rules: {
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
-    'no-restricted-syntax': ['error', 'WithStatement', "BinaryExpression[operator='in']"]
+    'no-restricted-syntax': ['error', 'WithStatement', "BinaryExpression[operator='in']"],
+    'consistent-return': [0],
+    'no-restricted-globals': [0],
+    'no-undef': [0]
   }
 };

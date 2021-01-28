@@ -46,7 +46,9 @@ class Input {
     for (let elem of DATA) {
       // eslint-disable-next-line max-len
       const setting = this.lang === 'RU' ? 'title' : 'titleUA';
-      const canAddResultItem = value && elem[setting].toLowerCase().startsWith(value) && result.length < this.resultMaxLength;
+      const canAddResultItem = value
+        && elem[setting].toLowerCase().startsWith(value)
+        && result.length < this.resultMaxLength;
       if (canAddResultItem) {
         result.push({ title: elem[setting], code: elem.code });
       }

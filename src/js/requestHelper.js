@@ -7,6 +7,7 @@ class RequestHelper {
     fetch(url)
       .then(response => response.json())
       .then(contents => cb(contents, arg))
+      // eslint-disable-next-line no-console
       .catch(() => console.log('Can’t access ' + url + ' response. Blocked by browser?'));
   }
 
@@ -16,6 +17,7 @@ class RequestHelper {
     Promise.all(requests)
       .then(responses => Promise.all(responses.map(r => r.json())))
       .then(results => cb(results))
+      // eslint-disable-next-line no-console
       .catch(() => console.log('Can’t access ' + urls + ' response. Blocked by browser?'));
   }
 }

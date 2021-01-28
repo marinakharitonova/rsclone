@@ -38,6 +38,7 @@ class Template {
     // eslint-disable-next-line no-param-reassign
     audio.currentTime = 0;
     audio.play()
+      // eslint-disable-next-line no-console
       .catch(err => console.log(err));
   }
 
@@ -202,7 +203,6 @@ class Template {
     this.noRacesNotification.classList.remove('hide');
   }
 
-  // eslint-disable-next-line consistent-return
   render(data, searchDate) {
     this.setDefaultView();
     if (data.segments.length === 0) {
@@ -212,8 +212,9 @@ class Template {
     let departedCount = 0;
     let availableRacesCount = 0;
     for (let elem of data.segments) {
-      // eslint-disable-next-line max-len
-      const tickets = elem.tickets_info && elem.tickets_info.places ? elem.tickets_info.places : null;
+      const tickets = elem.tickets_info && elem.tickets_info.places
+        ? elem.tickets_info.places
+        : null;
       const departure = new Date(elem.departure);
       // eslint-disable-next-line no-continue
       if (departure.getDate() !== new Date(searchDate).getDate()) continue;

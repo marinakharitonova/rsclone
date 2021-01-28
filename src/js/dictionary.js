@@ -12,8 +12,7 @@ class Dictionary {
       const key = elem.dataset.dictionary;
       const item = DICTIONARY_DATA.find(dictionaryElem => dictionaryElem.key === key);
       if (item) {
-        const text = this.lang === 'RU' ? item.langRu : item.langUa;
-        elem.innerHTML = text;
+        elem.innerHTML = this.lang === 'RU' ? item.langRu : item.langUa;
       }
     }
   }
