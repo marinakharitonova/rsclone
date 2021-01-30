@@ -130,7 +130,7 @@ class Template {
                     <div class="template__block template__block_name">
                         <div class="template__name">
                             <img src="${imgInfo.src}" alt="${imgInfo.name}" class="template__img">
-                            <a href="" class="link">${name}</a>
+                            <p class="text">${name}</p>
                         </div>
                         <p class="template__desc">
                             <span class="template__desc-carrier">${carrier}</span>
