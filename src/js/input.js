@@ -21,7 +21,7 @@ class Input {
   }
 
   setPlaceholder(lang) {
-    const elem = DICTIONARY.find(elem => elem.key === this.input.dataset.placeholder);
+    const elem = DICTIONARY.find(item => item.key === this.input.dataset.placeholder);
     if (elem) {
       const placeholder = lang === 'RU' ? elem.langRu : elem.langUa;
       this.input.setAttribute('placeholder', placeholder);
@@ -43,6 +43,7 @@ class Input {
   inputEventListener() {
     let result = [];
     let value = this.input.value.toLowerCase().trim();
+    if (!value) this.setData();
     for (let elem of DATA) {
       // eslint-disable-next-line max-len
       const setting = this.lang === 'RU' ? 'title' : 'titleUA';
@@ -84,7 +85,7 @@ class Input {
     return { value: this.input.value, code: this.input.dataset.code, result: this.result };
   }
 
-  setData(options) {
+  setData(options = {}) {
     let { value = '', result = [], code = '' } = options;
     this.result = result;
     this.input.value = value;

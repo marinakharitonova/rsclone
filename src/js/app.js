@@ -109,16 +109,20 @@ class App {
 
   searchButtonClickListener() {
     const params = this.inputContainer.getParams();
-    this.searchTrip(params);
+    if (params.from && params.to) {
+      this.searchTrip(params);
 
-    let codeFrom = params.from;
-    let codeTo = params.to;
-    let nameFrom = this.inputContainer.getState().from;
-    let nameTo = this.inputContainer.getState().to;
+      let codeFrom = params.from;
+      let codeTo = params.to;
+      let nameFrom = this.inputContainer.getState().from;
+      let nameTo = this.inputContainer.getState().to;
 
-    this.location.makeLastCitiesData({
-      nameFrom, nameTo, codeFrom, codeTo
-    });
+      this.location.makeLastCitiesData({
+        nameFrom, nameTo, codeFrom, codeTo
+      });
+    } else {
+      this.inputContainer.showNotification();
+    }
   }
 
   changeMode(mode) {
@@ -136,27 +140,23 @@ class App {
     const langParam = this.lang === 'RU' ? 'ru_RU' : 'uk_UA';
     const url = `https://api.rasp.yandex.net/v3.0/search/?apikey=${RequestHelper.getKey()}&format=json&from=${from}&to=${to}&lang=${langParam}&page=1${dateParam}${transportParm}`;
 
-    if (from && to) {
-      this.homeContainer.hide();
-      this.template.show();
-      this.template.showPreloader();
-      this.inputContainer.stayLight();
-      RequestHelper.sendRequest(url,
-        (...args) => {
-          this.inputContainer.removeLight();
-          this.template.render.call(this.template, ...args);
-          if (canSetHistory) {
-            Routing.setUrl('search', {
-              from: from,
-              to: to,
-              date: date,
-              transport: this.mode
-            }, this.inputContainer.getState());
-          }
-        }, date);
-    } else {
-      this.inputContainer.showNotification();
-    }
+    this.homeContainer.hide();
+    this.template.show();
+    this.template.showPreloader();
+    this.inputContainer.stayLight();
+    RequestHelper.sendRequest(url,
+      (...args) => {
+        this.inputContainer.removeLight();
+        this.template.render.call(this.template, ...args);
+        if (canSetHistory) {
+          Routing.setUrl('search', {
+            from: from,
+            to: to,
+            date: date,
+            transport: this.mode
+          }, this.inputContainer.getState());
+        }
+      }, date);
   }
 }
 
