@@ -130,8 +130,8 @@ class Location {
         (result) => {
           let userAddress = result.geoObjects.get(0).properties.get('description');
           let userCoordinates = result.geoObjects.get(0).geometry.getCoordinates();
-          if (userAddress.length > 1) {
-            let splitAddress = userAddress.split(',');
+          let splitAddress = userAddress.split(',');
+          if (splitAddress.length > 1) {
             const name = splitAddress[splitAddress.length - 1];
             this.setName(name);
             sessionStorage.setItem('locationName', name);

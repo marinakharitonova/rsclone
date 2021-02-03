@@ -80,14 +80,17 @@ class App {
     let urlParams = Routing.parseUrl(location.href);
 
     const paramName = this.lang === 'RU' ? 'title' : 'titleUA';
+    const dateOffset = new Date(urlParams.date) - new Date();
 
-    if (urlParams.from) {
+    if (urlParams.from && dateOffset >= 0) {
       const pointFrom = App.binarySearch(DATA, urlParams.from, 0, DATA.length - 1)[paramName];
       const titleFrom = pointFrom.split(',')[0];
       const pointTo = App.binarySearch(DATA, urlParams.to, 0, DATA.length - 1)[paramName];
       const titleTo = pointTo.split(',')[0];
       const date = new Date(Date.parse(urlParams.date)).toLocaleDateString();
       this.renderSearch(urlParams, titleFrom, titleTo, date);
+    } else {
+      location.href = 'https://rolling-scopes-school.github.io/marinakharitonova-JS2020Q3/rsclone/';
     }
   }
 
