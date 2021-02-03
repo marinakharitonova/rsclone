@@ -80,7 +80,15 @@ class App {
     let urlParams = Routing.parseUrl(location.href);
 
     const paramName = this.lang === 'RU' ? 'title' : 'titleUA';
-    const dateOffset = new Date(urlParams.date) - new Date();
+    const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
+
+    let tempDate = null;
+    if (urlParams.date) {
+      let date = new Date(urlParams.date);
+      tempDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+
+    const dateOffset = tempDate ? tempDate - today : 0;
 
     if (urlParams.from && dateOffset >= 0) {
       const pointFrom = App.binarySearch(DATA, urlParams.from, 0, DATA.length - 1)[paramName];
@@ -89,7 +97,7 @@ class App {
       const titleTo = pointTo.split(',')[0];
       const date = new Date(Date.parse(urlParams.date)).toLocaleDateString();
       this.renderSearch(urlParams, titleFrom, titleTo, date);
-    } else {
+    } else if (urlParams.from && dateOffset < 0) {
       location.href = 'https://rolling-scopes-school.github.io/marinakharitonova-JS2020Q3/rsclone/';
     }
   }
