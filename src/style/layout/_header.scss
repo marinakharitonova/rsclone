@@ -1,0 +1,50 @@
+.header{
+  &__container{
+    @include flex(row nowrap, space-between, flex-start);
+  }
+
+  &__left{
+    @include flex(column nowrap, flex-start, flex-start);
+  }
+
+  &__text{
+    text-transform: uppercase;
+    @include font-set(20px, 700, 30px, $cloneColor);
+    align-self: center;
+  }
+
+  &__logo{
+    &-text{
+      margin-right: 5px;
+    }
+  }
+
+  &__tickets{
+    @include flex(row nowrap, flex-start, flex-start);
+    margin-bottom: 10px;
+
+    &-img{
+      margin-right: 4px;
+    }
+
+    &-text{
+      font-family: 'Yandex-Bold', Arial, Verdana, sans-serif;
+      @include font-set(15px, 700, 23px, $textColor);
+      transition: opacity 0.3s;
+      text-decoration: none;
+      &:hover{
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &__desc{
+    text-align: center;
+  }
+
+  &__select{
+    outline: none;
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 5px;
+  }
+}

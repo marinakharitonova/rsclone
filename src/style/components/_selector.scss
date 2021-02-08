@@ -1,0 +1,55 @@
+.selector{
+  @include flex(row nowrap, center, flex-start);
+  @media #{$xs}{
+    flex-wrap: wrap;
+  }
+
+  &__item{
+    border: 1px solid $selectorBorderColor;
+    padding: 6px 14px;
+    font-size: 15px;
+    line-height: 20px;
+    border-right: none;
+    transition: background-color 0.3s;
+    @media #{$xs}{
+      border-radius: 3px;
+      border-right: 1px solid $selectorBorderColor;
+      margin-right: 3px;
+      margin-left: 3px;
+      margin-bottom: 5px;
+    }
+
+    &:first-child{
+      border-radius: 3px 0 0 3px;
+      @media #{$xs}{
+        border-radius: 3px;
+      }
+    }
+
+    &:last-child{
+      border-radius: 0 3px 3px 0;
+      border-right: 1px solid $selectorBorderColor;
+      @media #{$xs}{
+        border-radius: 3px;
+      }
+    }
+
+    &:hover{
+      border-color: $citiesBorderHoverColor;
+    }
+
+    &:focus{
+      outline: 2px solid $selectBorderActive;
+      background-color: $selectorBgActive;
+      outline-offset: -2px;
+      @media #{$xs}{
+        outline: none;
+        border: 1px solid $selectBorderActive;
+      }
+    }
+
+    &.active{
+      background-color: $selectorBgActive;
+    }
+  }
+}

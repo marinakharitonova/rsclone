@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="https://yastat.net/s3/rasp/s/morda-front/_/favicons/favicon-32x32.png">
+    <title data-dictionary="main"></title>
+    <script src="https://api-maps.yandex.ru/2.1?apikey=4334eecc-1496-4b85-9762-2ba51915bcaf&lang=ru_RU"
+            type="text/javascript">
+    </script>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__container">
+            <div class="header__left">
+                <div class="header__logo">
+                    <a href="" target="_blank" class="header__logo-text"><img
+                            src="src/assets/img/yandex-logo.png" alt="Яндекс"></a>
+                    <a href="https://rolling-scopes-school.github.io/marinakharitonova-JS2020Q3/rsclone/"
+                       class="logo-link"><img src="" alt="Расписания" class="rasp-logo"></a>
+                </div>
+                <div class="header__text">RS CLone</div>
+            </div>
+
+            <div class="header__desc">
+                <div class="header__tickets">
+                    <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-img"><img
+                            src="src/assets/img/tickets.png" alt="Билеты"></a>
+                    <a href="https://travel.yandex.ru/" target="_blank" class="header__tickets-text" data-dictionary="tickets"></a>
+                </div>
+                <select class="header__select">
+                    <option value="RU">RU</option>
+                    <option value="UA">UA</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="main">
+    <div class="modal-overlay"></div>
+    <div class="modal-window">
+        <div class="modal-window__inner">
+            <p class="text"><span>Уважаемые проверяющие!</span>  В&nbsp;работе используется API Яндекс.Расписаний.
+                <br><br>
+            Для&nbsp;корректной работы приложения установите и активируйте расширение для&nbsp;Chrome, разрешающее кросс-доменные запросы,
+                например,
+                <a href="https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
+                   target="_blank"
+                   class="link"
+                >&nbsp;вот&nbsp;это.</a>
+                <br><br>
+                Спасибо за&nbsp;понимание :)
+            </p>
+            <img src="src/assets/img/close.svg" alt="Close" class="modal-window__close">
+            <button class="modal-window__all" data-dictionary="no-show"></button>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="main__title" data-dictionary="title">
+        </h1>
+        <div class="selector main__selector">
+            <button class="selector__item active" data-value="all" data-dictionary="all"></button>
+            <button class="selector__item" data-value="plane" data-dictionary="plane"></button>
+            <button class="selector__item" data-value="train" data-dictionary="train"></button>
+            <button class="selector__item" data-value="suburban" data-dictionary="suburban"></button>
+            <button class="selector__item" data-value="bus" data-dictionary="bus"></button>
+        </div>
+        <div class="cities main__cities">
+            <div class="cities__fields">
+                <div class="cities__places">
+                    <div class="cities__names">
+                        <div class="cities__input-wrapper cities__input-wrapper_from">
+                            <input type="text"
+                                   class="cities__input cities__input_from"
+                                   data-placeholder="from"
+                                   placeholder="">
+                            <ul class="list list-from"></ul>
+                        </div>
+                        <button class="cities__change">
+                            <img src="src/assets/img/arrows.svg" alt="" class="cities__change-arrow">
+                        </button>
+                        <div class="cities__input-wrapper cities__input-wrapper_to">
+                            <input type="text"
+                                   class="cities__input cities__input_to"
+                                   data-placeholder="to"
+                                   placeholder="">
+                            <ul class="list"></ul>
+                        </div>
+                    </div>
+                    <div class="cities__last"></div>
+                </div>
+                <div class="cities__date">
+                    <div class="cities__input-wrapper cities__input-wrapper_date">
+                        <input type="text" class="cities__input cities__input_date" value="cегодня" readonly id="datepicker">
+                    </div>
+                    <div class="cities__date-text">
+                        <button class="link link-date" data-value="today" data-dictionary="today"></button>
+                        <button class="link link-date" data-value="tomorrow" data-dictionary="tomorrow"></button>
+                    </div>
+                </div>
+
+                <div class="cities__notification" data-dictionary="no-params"></div>
+
+                <button class="cities__button" data-dictionary="search"></button>
+            </div>
+        </div>
+        <div class="home main__home">
+            <div class="home__location hide">
+                <div class="home__name">
+                    <div class="link_home"></div>
+                </div>
+
+                <p class="text" data-dictionary="nearest"></p>
+            </div>
+            <div class="home__places"></div>
+            <div class="home__advert advert">
+                <div class="advert__item">
+                    <a href="https://mobile.yandex.ru/apps/android/rasp" target="_blank" class="advert__link">
+                        <img src="src/assets/img/train-adv.svg" alt="Электички для смартфона" class="advert__img">
+                        <h3 class="advert__name" data-dictionary="adv1"></h3>
+                        <div class="advert__buttons">
+                            <button class="advert__button">
+                                <img src="src/assets/img/google-icon.png" alt="Google play" class="advert__img_small">
+                            </button>
+                            <button class="advert__button">
+                                <img src="src/assets/img/apple-icon.png" alt="App Store" class="advert__img_small">
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <div class="advert__item">
+                    <a href="https://travel.yandex.ru/buses" target="_blank" class="advert__link">
+                        <img src="src/assets/img/bus-adv.svg" alt="Яндекс.Автобусы" class="advert__img">
+                        <h3 class="advert__name" data-dictionary="adv2"></h3>
+                        <p class="advert__text" data-dictionary="adv2-text"></p>
+                    </a>
+                </div>
+                <div class="advert__item">
+                    <a href="https://travel.yandex.ru/avia" target="_blank" class="advert__link">
+                        <img src="src/assets/img/plane-adv.svg" alt="Яндекс.Авиабилеты" class="advert__img">
+                        <h3 class="advert__name" data-dictionary="adv3"></h3>
+                        <p class="advert__text" data-dictionary="adv3-text"></p>
+                    </a>
+                </div>
+            </div>
+            <div class="home__info info">
+                <h2 class="info__caption" data-dictionary="info-caption">
+                </h2>
+                <p class="info__text" data-dictionary="info-text">
+                </p>
+            </div>
+        </div>
+        <div class="template main__template hide">
+            <div class="template__preloader">
+                <img src="src/assets/img/animation-bus.gif" alt="" class="template__preloader-img">
+                <p class="text" data-dictionary="search-text"></p>
+            </div>
+
+            <div class="template__departed hide">
+                <ul class="template__list-departed hide"></ul>
+                <button class="template__departed-btn">
+                    <span class="template__departed-btn-text" data-dictionary="show-gone"></span> <span class="template__departed-col"></span>
+                </button>
+            </div>
+            <ul class="template__list hide"></ul>
+            <div class="template__no-transport hide">
+                <h2 data-dictionary="no-races"></h2>
+                <p class="text" data-dictionary="see-more"></p>
+            </div>
+            <div class="template__no-races hide">
+                <p class="text" data-dictionary="no-races-today"></p>
+            </div>
+        </div>
+        <audio src="src/assets/sound/result.mp3" id="success-result"></audio>
+        <audio src="src/assets/sound/no-result.mp3" id="no-result"></audio>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container footer__container">
+        <div class="footer__block">
+            <iframe class="footer__logo" frameborder="0" style="overflow: hidden; border: 0; width: 740px; height: 51px;" src="//yandex.st/rasp/media/apicc/copyright_horiz_yellow.html"></iframe>
+            <iframe class="footer__logo_mob" frameborder="0" style="overflow: hidden; border: 0; width: 240px; height: 130px;" src="//yandex.st/rasp/media/apicc/copyright_vert_yellow.html"></iframe>
+        </div>
+        <div class="footer__block">
+            <a href="https://rs.school/js/"><img src="https://rs.school/images/rs_school_js.svg" alt="RS School"></a>
+        </div>
+        <div class="footer__block">
+            <a href="https://github.com/marinakharitonova" target="_blank" class="footer__link">
+                <img src="src/assets/img/github-logo.svg" alt="github" class="footer__link-img">
+                <span class="footer__link-text">marinakharitonova</span>
+            </a>
+            <span class="footer__text">2021</span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

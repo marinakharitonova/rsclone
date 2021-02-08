@@ -1,0 +1,30 @@
+.link{
+  color: $linkColor;
+  transition: color 0.3s;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  &-wrapper{
+    position: relative;
+  }
+
+  &:hover{
+    color: $linkHoverColor;
+  }
+
+  &_home{
+    font-size: 28px;
+    line-height: 40px;
+    position: relative;
+    padding-left: 20px;
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 15px;
+      left: 0;
+      background: url("./src/assets/img/location.svg") no-repeat center;
+    }
+  }
+}

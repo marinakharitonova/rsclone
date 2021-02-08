@@ -1,0 +1,43 @@
+.station{
+  &__img{
+    margin-right: 8px;
+    width: 25px;
+
+    &_arrow{
+      transition: transform 0.3s;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      right: -15px;
+    }
+  }
+  &__name{
+    font-size: 18px;
+    line-height: 20px;
+  }
+  &__caption{
+    @include flex(row nowrap, flex-start, center);
+    margin-bottom: 10px;
+
+    &_link{
+      cursor: pointer;
+      transition: color 0.3s;
+      position: relative;
+      &:hover{
+        color: $linkHoverColor;
+      }
+    }
+  }
+  &__item{
+    margin-bottom: 7px;
+    min-width: 100%;
+  }
+  .link{
+    font-size: 15px;
+    line-height: 18px;
+  }
+  &__list{
+    @include flex(column nowrap, flex-start, flex-start);
+  }
+}

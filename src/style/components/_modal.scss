@@ -1,0 +1,104 @@
+.modal-window{
+  position: fixed;
+  left: 50%;
+  margin-left: -300px;
+  margin-top: -150px;
+  opacity: 0;
+  top: -300px;
+  transition: 0.5s;
+  background-color: #fff;
+  border-radius: 36px;
+  width: 600px;
+  height: 300px;
+  @media #{$xs}{
+    width: 300px;
+    margin-left: -150px;
+    height: 400px;
+    margin-top: -200px;
+  }
+
+  &.active{
+    opacity: 1;
+    z-index: 6;
+    top: 50%;
+  }
+
+  &__inner{
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__close{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+
+    &:hover{
+      opacity: 0.75;
+    }
+  }
+
+  &__all{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 18px;
+    transition: color 0.3s;
+    color: $linkColor;
+    @media #{$xs}{
+      text-transform: none;
+    }
+    &:hover{
+      color: $linkHoverColor;
+    }
+  }
+
+  .text{
+    text-align: center;
+    font-size: 18px;
+    line-height: 24px;
+    margin-top: 20px;
+    @media #{$xs}{
+      margin-top: 30px;
+    }
+
+    span{
+      display: block;
+    }
+
+    .link{
+      font-size: inherit;
+      line-height: inherit;
+    }
+  }
+
+}
+
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+  display: none;
+
+  &.active{
+    display: block;
+    pointer-events: auto;
+    z-index: 5;
+  }
+}
+
+.no-scroll{
+  overflow: hidden;
+  height: 100vh;
+}

@@ -1,0 +1,109 @@
+.home{
+
+  &__name{
+    position: relative;
+  }
+
+  &__close{
+    width: 25px;
+    height: 25px;
+    background: url("../src/assets/img/close.svg") no-repeat center;
+    margin-left: auto;
+  }
+
+  &__dropdown{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 15px 20px;
+    width: 400px;
+    border: 1px solid $selectorBorderColor;
+    background: $white;
+    box-shadow: 5px 4px 15px -5px rgba(34, 60, 80, 0.2);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s;
+    &.active{
+      opacity: 1;
+      z-index: 2;
+    }
+  }
+
+  &__button{
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 18px;
+    background-color: $homeBtnColor;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+
+    &:hover{
+      background-color: $homeBtnColorHover;
+    }
+  }
+
+  &__input{
+    width: 170px;
+    border: 2px solid $homeBtnColorHover;
+    padding: 8px 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+
+    &:focus{
+      border: 2px solid $selectBorderActive;
+    }
+
+  }
+
+  &__fields{
+    @include flex(row nowrap, flex-start, flex-start);
+    margin-bottom: 15px;
+  }
+
+  &__location{
+    margin-bottom: 20px;
+    @media #{$xs}{
+      margin-bottom: 10px;
+    }
+  }
+
+  &__places{
+    width: 400px;
+    background-color: $stationsBgColor;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.05);
+    border-radius: 2px;
+    padding: 0 20px;
+    margin-bottom: 40px;
+    @media #{$xs}{
+      width: 100%;
+    }
+  }
+
+  &__station{
+    padding: 10px 4px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    position: relative;
+
+    &:hover{
+      .list_station{
+        opacity: 1;
+        z-index: 2;
+      }
+      .station__img_arrow{
+        transform: rotate(180deg);
+      }
+    }
+
+    &_list{
+      .station__caption{
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__advert{
+    margin-bottom: 40px;
+  }
+}

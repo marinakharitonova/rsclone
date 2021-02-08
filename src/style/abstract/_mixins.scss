@@ -1,0 +1,27 @@
+@mixin flex($flex-flow:null, $justify-content:null, $align-items:null ) {
+  display: flex;
+  @if ($flex-flow != null) {
+    flex-flow: $flex-flow;
+  }
+  @if ($justify-content != null) {
+    justify-content: $justify-content;
+  }
+  @if ($align-items != null) {
+    align-items: $align-items;
+  }
+}
+
+@mixin font-set($font-size: null,$font-weight: null,$line-height: null,$color:null) {
+  @if ($font-size != null) {
+    font-size: $font-size;
+  }
+  @if ($font-weight != null) {
+    font-weight: $font-weight;
+  }
+  @if ($line-height != null) {
+    line-height: $line-height;
+  }
+  @if ($color != null) {
+    color: $color;
+  }
+}

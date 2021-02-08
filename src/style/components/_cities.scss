@@ -1,0 +1,226 @@
+.cities{
+  &__fields, &__names{
+    @include flex(row nowrap, flex-start, flex-start);
+    @media #{$xs}{
+      flex-direction: column;
+    }
+  }
+
+  &__fields{
+    transition: opacity 0.3s;
+    position: relative;
+    &.light{
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &__notification{
+    position: absolute;
+    padding: 10px;
+    background: $notificationColor;
+    border-radius: 7px;
+    text-transform: uppercase;
+    color: $white;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    top: -50px;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s;
+    &.active{
+      z-index: 3;
+      opacity: 1;
+    }
+
+    &:after{
+      content: '';
+      position: absolute;
+      right: 20px;
+      bottom: -30px;
+      border: 15px solid transparent;
+      border-top: 15px solid $notificationColor;
+    }
+  }
+
+  &__places{
+    flex-grow: 1;
+    @media #{$xs}{
+      width: 100%;
+    }
+  }
+
+  &__names{
+    flex-grow: 1;
+    margin-bottom: 10px;
+  }
+
+  &__input{
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px 15px;
+    border: 1px solid $selectorBorderColor;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+
+    &.active{
+      outline: 2px solid $selectBorderActive;
+      outline-offset: -2px;
+    }
+
+    &:hover{
+      border: 1px solid $citiesBorderHoverColor;
+    }
+
+    &_from, &_to{
+      border-right-color: transparent;
+      @media #{$xs}{
+        border-right: 1px solid $selectorBorderColor;
+      }
+    }
+    &_to, &_date{
+      border-left-color: transparent;
+      @media #{$xs}{
+        border-left: 1px solid $selectorBorderColor;
+      }
+    }
+
+    &_date{
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      background: transparent;
+    }
+
+    &-wrapper{
+      position: relative;
+      flex-grow: 1;
+      @media #{$xs}{
+        width: 100%;
+      }
+
+      &_date{
+        margin-bottom: 10px;
+        @media #{$xs}{
+          margin-bottom: 0;
+        }
+        &:before{
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 10px;
+          height: 26px;
+          width: 1px;
+          background: $selectorBorderColor;
+          z-index: 2;
+          @media #{$xs}{
+            content: none;
+          }
+        }
+        &:after{
+          position: absolute;
+          content: '';
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          right: 5px;
+          width: 35px;
+          height: 27px;
+          background: url("./src/assets/img/calendar.png") no-repeat center / cover;
+        }
+      }
+    }
+  }
+
+  &__button{
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px 15px;
+    background-color: $citiesButtonColor;
+    width: 100px;
+    border-radius: 0 3px 3px 0;
+    transition: background-color 0.3s;
+    border: 1px solid $citiesButtonColor;
+    @media #{$xs}{
+      width: 100%;
+      border-radius: 3px;
+    }
+
+    &:hover{
+      background-color: $selectBorderActive;
+    }
+  }
+
+  &__change{
+    width: 50px;
+    height: 46px;
+    position: relative;
+    border-top: 1px solid $selectorBorderColor;
+    border-bottom: 1px solid $selectorBorderColor;
+    @media #{$xs}{
+      border-top: 0;
+      border-bottom: 0;
+      align-self: center;
+    }
+    &:after, &:before{
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 10px;
+      height: 26px;
+      width: 1px;
+      background: $selectorBorderColor;
+      z-index: 2;
+      @media #{$xs}{
+        content: none;
+      }
+    }
+    &:before{
+      right: auto;
+      left: -1px;
+    }
+
+    &:hover{
+      border: 1px solid $citiesBorderHoverColor;
+      &:after, &:before{
+        content: none;
+      }
+    }
+
+    &-arrow{
+      width: 35px;
+      margin-top: 5px;
+    }
+  }
+
+  &__date{
+    flex-grow: 1;
+    @media #{$xs}{
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    &-text{
+      cursor: default;
+    }
+  }
+
+  &__last{
+    cursor: default;
+    @include flex(row nowrap, flex-start, flex-start);
+    @media #{$xs}{
+      display: none;
+    }
+
+    .link-wrapper{
+      &:hover{
+        .list_last{
+          opacity: 1;
+          z-index: 3;
+        }
+      }
+    }
+  }
+}
